@@ -1,0 +1,4 @@
+C:\Ryan\Uni\.Net C# works\Assignment 2\Assignment-2-Repo-Test\Assignment_2_Test\ConsoleApp1\obj\Debug\net7.0\ConsoleApp1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Ryan\Uni\.Net C# works\Assignment 2\Assignment-2-Repo-Test\Assignment_2_Test\ConsoleApp1\obj\Debug\net7.0\ConsoleApp1.AssemblyInfoInputs.cache
+C:\Ryan\Uni\.Net C# works\Assignment 2\Assignment-2-Repo-Test\Assignment_2_Test\ConsoleApp1\obj\Debug\net7.0\ConsoleApp1.AssemblyInfo.cs
+C:\Ryan\Uni\.Net C# works\Assignment 2\Assignment-2-Repo-Test\Assignment_2_Test\ConsoleApp1\obj\Debug\net7.0\ConsoleApp1.csproj.CoreCompileInputs.cache
