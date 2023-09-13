@@ -14,8 +14,17 @@ namespace TestProgram
 
             //StartProgram();
 
-            Admin admin = new Admin(001);
-            admin.MainMenu();
+            Admin admin1 = new Admin(1, "Ryan");
+            admin1.MainMenu();
+
+            Doctor doctor1 = new Doctor(01, "Pan");
+            doctor1.MainMenu();
+
+            Patient patient1 = new Patient(001, "Li");
+            patient1.MainMenu();
+
+            TextMenu textMenu = new TextMenu();
+            textMenu.PrintLogInMenu();
 
             Console.ReadKey();
         }
@@ -26,47 +35,13 @@ namespace TestProgram
         }
     }
 
-    public abstract class Person
+    public class TextMenu
     {
-        //public int Id { get; set; }
-        public string Name { get; set; }
-        //public string Description { get; set; }
-        public Person(string personName)
-        {   
-            this.Name = personName;
-        }
-
-        //public virtual void DisplayMainMenu();
-
-    }
-
-    public class Patient: Person
-    {
-        private int Patient_ID;
-
-        public Patient(int patient_ID): base(Name)
+        public void PrintLogInMenu()
         {
-            this.Patient_ID = patient_ID;
-        }
-
-        public void MainMenu()
-        {
-            Console.WriteLine("This would display the main menu for the patient");
+            Console.WriteLine("This String is from the print log in menu");
+            Console.WriteLine(Console.ReadLine());
         }
     }
-
-    public class Doctor: Person
-    {
-        private int Doctor_ID;
-
-        public Doctor(int doctor_ID)// : base(Name)
-        {
-            this.Doctor_ID = doctor_ID;
-        }
-
-        public void MainMenu()
-        {
-            Console.WriteLine("This would display the main menu for the doctor");
-        }
-    }
+        
 }
