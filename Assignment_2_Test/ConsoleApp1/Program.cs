@@ -86,39 +86,44 @@ namespace TestProgram
                 LogInPW = Console.ReadLine();
 
                 TestLogInCredentials(LogInID, LogInPW);
+
+                switch (currentUserType)
+                {
+                    case userType.LoggedOut:
+                        Console.WriteLine("The system is still at LoggedOut state");
+                        Console.ReadKey();
+                        break;
+                    case userType.Admin:
+                        //Console.WriteLine("The system is now at Admin state");
+                        //Console.ReadKey();
+
+                        Admin admin = new Admin(LogInID, LogInPW);
+                        admin.MainMenu();
+
+                        LoggedIn = !LoggedIn;// This should set the log in state to false
+                        currentUserType = userType.LoggedOut;
+
+                        Console.Clear();
+                        //PrintLogInMenu();
+
+                        break;
+                    case userType.Doctor:
+                        Console.WriteLine("The system is now at Doctor state");
+                        Console.ReadKey();
+                        break;
+                    case userType.Patient:
+                        Console.WriteLine("The system is now at Patient state");
+                        Console.ReadKey();
+                        break;
+                    default:
+                        Console.WriteLine("Here is the Default state ;p");
+                        Console.ReadKey();
+                        break;
+                }
             }
             while (!LoggedIn); 
 
-            switch (currentUserType)
-            {
-                case userType.LoggedOut:
-                    Console.WriteLine("The system is still at LoggedOut state");
-                    Console.ReadKey();
-                    break;
-                case userType.Admin:
-                    //Console.WriteLine("The system is now at Admin state");
-                    //Console.ReadKey();
-
-                    Admin admin = new Admin(LogInID, LogInPW);
-                    admin.MainMenu();
-
-                    LoggedIn = true;
-                    currentUserType = userType.LoggedOut;
-
-                    break;
-                case userType.Doctor:
-                    Console.WriteLine("The system is now at Doctor state");
-                    Console.ReadKey();
-                    break;
-                case userType.Patient:
-                    Console.WriteLine("The system is now at Patient state");
-                    Console.ReadKey();
-                    break;
-                default:
-                    Console.WriteLine("Here is the Default state ;p");
-                    Console.ReadKey();
-                    break;
-            }
+            
 
         }
 

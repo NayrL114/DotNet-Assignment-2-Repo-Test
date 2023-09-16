@@ -43,19 +43,20 @@ namespace ConsoleApp1
                 Console.WriteLine("6. Add patient");
                 Console.WriteLine("7. Log Out");
                 Console.WriteLine("8. Exit");
+                Console.WriteLine("\nYour input for choosing option is: ");
 
                 //MainMenuInput = Convert.ToInt32(Console.ReadLine());
                 MainMenuInputString = Console.ReadLine();
-                Console.WriteLine("MainMenuInputString is {0}", MainMenuInputString);
+                //Console.WriteLine("MainMenuInputString is {0}", MainMenuInputString);
                 //MainMenuInput = Convert.ToInt32(Console.ReadLine());
                 try
                 {
                     MainMenuInput = Convert.ToInt32(MainMenuInputString);
-                    Console.WriteLine("MainMenuInput is {0}", MainMenuInput);
+                    //Console.WriteLine("MainMenuInput is {0}", MainMenuInput);
                 }
                 catch (FormatException e)
                 {
-                    Console.WriteLine("Invalid Input format. \nPress any keys to retry");
+                    Console.WriteLine("\nInvalid Input format. \nPress any keys to retry");
                     Console.ReadKey();
                     Console.Clear();
                 }
@@ -69,20 +70,23 @@ namespace ConsoleApp1
                 switch (MainMenuInput)
                 {
                     case 7:
-                        Console.WriteLine("Logging out, Thank you!\nPress any keys to continue");
+                        Console.WriteLine("\nLogging out, Thank you!\nPress any keys to continue");
                         Console.ReadKey();
                         Console.Clear();
                         LoggedIn = !LoggedIn; // Logging out of admin user and stop admin menu displaying. 
                         return;
                     case 8:
-                        Console.WriteLine("Exiting application, Thank you!\nPress any keys to continue");
+                        Console.WriteLine("\nExiting application, Thank you!\nPress any keys to continue");
                         Console.ReadKey();
-                        Console.Clear();
-                        LoggedIn = !LoggedIn; // Logging out of admin user and stop admin menu displaying. 
+
+                        Environment.Exit(0);
+
+                        //Console.Clear();
+                        //LoggedIn = !LoggedIn; // Logging out of admin user and stop admin menu displaying. 
                         return;
                         //break;
                     default:
-                        Console.WriteLine("Incorrect number Input. \nPress any keys to retry");
+                        Console.WriteLine("\nIncorrect number Input. \nPress any keys to retry");
                         Console.ReadKey();
                         Console.Clear();
                         break;
