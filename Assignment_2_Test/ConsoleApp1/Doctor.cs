@@ -8,9 +8,9 @@ namespace ConsoleApp1
 {
     internal class Doctor: User
     {
-        private int Doctor_ID;
+        private string Doctor_ID;
 
-        public Doctor(int doctor_ID, string name)// :base(Name)
+        public Doctor(string doctor_ID, string name)// :base(Name)
         {
             this.Doctor_ID = doctor_ID;
             this.Name = name;

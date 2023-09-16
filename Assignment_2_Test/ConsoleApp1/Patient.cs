@@ -9,9 +9,9 @@ namespace ConsoleApp1
 {
     internal class Patient: User
     {
-        private int Patient_ID;
+        private string Patient_ID;
 
-        public Patient(int patient_ID, string name)
+        public Patient(string patient_ID, string name)
         {
             this.Patient_ID = patient_ID;
             this.Name = name;

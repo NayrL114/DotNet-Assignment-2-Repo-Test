@@ -3,6 +3,7 @@
 
 using ConsoleApp1;
 using System;
+using System.Transactions;
 
 public enum userType
 {
@@ -58,6 +59,9 @@ namespace TestProgram
 
         public userType currentUserType = userType.LoggedOut;
 
+        public string LogInID;
+        public string LogInPW;
+
         private String correctAdminID = "00001";
         private String correctAdminPW = "12345678";
 
@@ -75,9 +79,11 @@ namespace TestProgram
             {
                 Console.WriteLine("Welcome to DOTNET Hospital Management System");
                 Console.Write("ID: ");
-                String LogInID = Console.ReadLine();
+                //String LogInID = Console.ReadLine();
+                LogInID = Console.ReadLine();
                 Console.Write("Password: ");
-                String LogInPW = Console.ReadLine();
+                //String LogInPW = Console.ReadLine();
+                LogInPW = Console.ReadLine();
 
                 TestLogInCredentials(LogInID, LogInPW);
             }
@@ -90,8 +96,15 @@ namespace TestProgram
                     Console.ReadKey();
                     break;
                 case userType.Admin:
-                    Console.WriteLine("The system is now at Admin state");
-                    Console.ReadKey();
+                    //Console.WriteLine("The system is now at Admin state");
+                    //Console.ReadKey();
+
+                    Admin admin = new Admin(LogInID, LogInPW);
+                    admin.MainMenu();
+
+                    LoggedIn = true;
+                    currentUserType = userType.LoggedOut;
+
                     break;
                 case userType.Doctor:
                     Console.WriteLine("The system is now at Doctor state");
@@ -138,10 +151,10 @@ namespace TestProgram
 
             if (LogInID == correctAdminID && LogInPW == correctAdminPW)
             {
-                Console.WriteLine("You now have successfully logged in as: ADMIN \nPress any keys to continue. ");
+                //Console.WriteLine("You now have successfully logged in as: ADMIN \nPress any keys to continue. ");
                 currentUserType = userType.Admin;
                 LoggedIn = !LoggedIn;
-                Console.ReadKey();
+                //Console.ReadKey();
                 Console.Clear();
                 return;
             }
