@@ -12,3 +12,17 @@ C:\Ryan\Uni\.Net C# works\Assignment 2\Assignment-2-Repo-Test\Assignment_2_Test\
 C:\Ryan\Uni\.Net C# works\Assignment 2\Assignment-2-Repo-Test\Assignment_2_Test\ConsoleApp1\obj\Debug\net7.0\ConsoleApp1.pdb
 C:\Ryan\Uni\.Net C# works\Assignment 2\Assignment-2-Repo-Test\Assignment_2_Test\ConsoleApp1\obj\Debug\net7.0\ConsoleApp1.genruntimeconfig.cache
 C:\Ryan\Uni\.Net C# works\Assignment 2\Assignment-2-Repo-Test\Assignment_2_Test\ConsoleApp1\obj\Debug\net7.0\ref\ConsoleApp1.dll
+D:\Ryan\Study\University\2023 Spring\DOTNET\DotNet-Assignment-2-Repo-Test\Assignment_2_Test\ConsoleApp1\bin\Debug\net7.0\ConsoleApp1.exe
+D:\Ryan\Study\University\2023 Spring\DOTNET\DotNet-Assignment-2-Repo-Test\Assignment_2_Test\ConsoleApp1\bin\Debug\net7.0\ConsoleApp1.deps.json
+D:\Ryan\Study\University\2023 Spring\DOTNET\DotNet-Assignment-2-Repo-Test\Assignment_2_Test\ConsoleApp1\bin\Debug\net7.0\ConsoleApp1.runtimeconfig.json
+D:\Ryan\Study\University\2023 Spring\DOTNET\DotNet-Assignment-2-Repo-Test\Assignment_2_Test\ConsoleApp1\bin\Debug\net7.0\ConsoleApp1.dll
+D:\Ryan\Study\University\2023 Spring\DOTNET\DotNet-Assignment-2-Repo-Test\Assignment_2_Test\ConsoleApp1\bin\Debug\net7.0\ConsoleApp1.pdb
+D:\Ryan\Study\University\2023 Spring\DOTNET\DotNet-Assignment-2-Repo-Test\Assignment_2_Test\ConsoleApp1\obj\Debug\net7.0\ConsoleApp1.GeneratedMSBuildEditorConfig.editorconfig
+D:\Ryan\Study\University\2023 Spring\DOTNET\DotNet-Assignment-2-Repo-Test\Assignment_2_Test\ConsoleApp1\obj\Debug\net7.0\ConsoleApp1.AssemblyInfoInputs.cache
+D:\Ryan\Study\University\2023 Spring\DOTNET\DotNet-Assignment-2-Repo-Test\Assignment_2_Test\ConsoleApp1\obj\Debug\net7.0\ConsoleApp1.AssemblyInfo.cs
+D:\Ryan\Study\University\2023 Spring\DOTNET\DotNet-Assignment-2-Repo-Test\Assignment_2_Test\ConsoleApp1\obj\Debug\net7.0\ConsoleApp1.csproj.CoreCompileInputs.cache
+D:\Ryan\Study\University\2023 Spring\DOTNET\DotNet-Assignment-2-Repo-Test\Assignment_2_Test\ConsoleApp1\obj\Debug\net7.0\ConsoleApp1.dll
+D:\Ryan\Study\University\2023 Spring\DOTNET\DotNet-Assignment-2-Repo-Test\Assignment_2_Test\ConsoleApp1\obj\Debug\net7.0\refint\ConsoleApp1.dll
+D:\Ryan\Study\University\2023 Spring\DOTNET\DotNet-Assignment-2-Repo-Test\Assignment_2_Test\ConsoleApp1\obj\Debug\net7.0\ConsoleApp1.pdb
+D:\Ryan\Study\University\2023 Spring\DOTNET\DotNet-Assignment-2-Repo-Test\Assignment_2_Test\ConsoleApp1\obj\Debug\net7.0\ConsoleApp1.genruntimeconfig.cache
+D:\Ryan\Study\University\2023 Spring\DOTNET\DotNet-Assignment-2-Repo-Test\Assignment_2_Test\ConsoleApp1\obj\Debug\net7.0\ref\ConsoleApp1.dll

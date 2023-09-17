@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Ryan\\Uni\\.Net C# works\\Assignment 2\\Assignment-2-Repo-Test\\Assignment_2_Test\\ConsoleApp1\\ConsoleApp1.csproj": {}
+    "D:\\Ryan\\Study\\University\\2023 Spring\\DOTNET\\DotNet-Assignment-2-Repo-Test\\Assignment_2_Test\\ConsoleApp1\\ConsoleApp1.csproj": {}
   },
   "projects": {
-    "C:\\Ryan\\Uni\\.Net C# works\\Assignment 2\\Assignment-2-Repo-Test\\Assignment_2_Test\\ConsoleApp1\\ConsoleApp1.csproj": {
+    "D:\\Ryan\\Study\\University\\2023 Spring\\DOTNET\\DotNet-Assignment-2-Repo-Test\\Assignment_2_Test\\ConsoleApp1\\ConsoleApp1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Ryan\\Uni\\.Net C# works\\Assignment 2\\Assignment-2-Repo-Test\\Assignment_2_Test\\ConsoleApp1\\ConsoleApp1.csproj",
+        "projectUniqueName": "D:\\Ryan\\Study\\University\\2023 Spring\\DOTNET\\DotNet-Assignment-2-Repo-Test\\Assignment_2_Test\\ConsoleApp1\\ConsoleApp1.csproj",
         "projectName": "ConsoleApp1",
-        "projectPath": "C:\\Ryan\\Uni\\.Net C# works\\Assignment 2\\Assignment-2-Repo-Test\\Assignment_2_Test\\ConsoleApp1\\ConsoleApp1.csproj",
-        "packagesPath": "C:\\Users\\20853\\.nuget\\packages\\",
-        "outputPath": "C:\\Ryan\\Uni\\.Net C# works\\Assignment 2\\Assignment-2-Repo-Test\\Assignment_2_Test\\ConsoleApp1\\obj\\",
+        "projectPath": "D:\\Ryan\\Study\\University\\2023 Spring\\DOTNET\\DotNet-Assignment-2-Repo-Test\\Assignment_2_Test\\ConsoleApp1\\ConsoleApp1.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "D:\\Ryan\\Study\\University\\2023 Spring\\DOTNET\\DotNet-Assignment-2-Repo-Test\\Assignment_2_Test\\ConsoleApp1\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\20853\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],

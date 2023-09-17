@@ -16,7 +16,12 @@ namespace ConsoleApp1
 
         public static void WriteToFile(string path)
         {
-            if (File.Exists(path)) { }  
+            if (File.Exists(path)) { }
+        }
+
+        public static String[] ReadStringArrayFromFile(string path)
+        {
+            return new string[0];
         }
     }
 }

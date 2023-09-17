@@ -59,17 +59,24 @@ namespace TestProgram
 
         public userType currentUserType = userType.LoggedOut;
 
-        public string LogInID;
-        public string LogInPW;
+        public string LogInID = "";
+        public string LogInPW = "";
+
+        private String[] AdminFilelines;
+        private String[] doctorFilelines;
+        private String[] patientFilelines;
 
         private String correctAdminID = "00001";
         private String correctAdminPW = "12345678";
+        private String adminName = "Ryan";
 
         private String correctDoctorID = "10001";
         private String correctDoctorPW = "123456";
+        private String doctorName = "Susan";
 
         private String correctPatientID = "11001";
         private String correctPatientPW = "11223344";
+        private String patientName = "Pan";
 
         private bool LoggedIn;
         public void PrintLogInMenu()
@@ -97,7 +104,7 @@ namespace TestProgram
                         //Console.WriteLine("The system is now at Admin state");
                         //Console.ReadKey();
 
-                        Admin admin = new Admin(LogInID, LogInPW);
+                        Admin admin = new Admin(LogInID, adminName);
                         admin.MainMenu();
 
                         LoggedIn = !LoggedIn;// This should set the log in state to false
