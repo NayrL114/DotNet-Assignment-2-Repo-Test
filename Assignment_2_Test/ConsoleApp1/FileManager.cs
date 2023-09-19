@@ -21,6 +21,46 @@ namespace ConsoleApp1
 
         public static String[] ReadStringArrayFromFile(string path)
         {
+            //return new string[0];
+            try
+            {
+                string[] lines;
+
+                StreamReader fileContent = new StreamReader(path);
+                //fileContent.
+
+                while (!fileContent.EndOfStream)
+                {
+                    //string line = fileContent.ReadLine();
+                    lines.Append(fileContent.ReadLine());
+                }
+
+                return lines;
+
+                /*string[] lines = System.IO.File.ReadAllLines(path);
+
+                foreach (String line in lines)
+                {
+                    string[] splits = line.Split(',');
+                    //Console.WriteLine
+                    foreach (String split in splits)
+                    {
+                        Console.WriteLine(split);
+                    }
+
+                    Console.ReadKey();
+                    Console.Clear();
+                    return splits;*/
+                //}
+            }
+            catch(FileNotFoundException e)
+            {
+                // Write the code to Display the error message
+                Console.WriteLine(e.Message);
+                // Write the code to Read a key from user   
+                Console.ReadKey();
+                return new string[0];
+            }
             return new string[0];
         }
     }

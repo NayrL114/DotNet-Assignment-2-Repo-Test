@@ -13,6 +13,12 @@ public enum userType
     LoggedOut
 }
 
+struct Appointment
+{
+    Patient bookedPatient;
+    Doctor bookedDoctor;
+}
+
 namespace TestProgram
 {
     public class Program
@@ -62,9 +68,12 @@ namespace TestProgram
         public string LogInID = "";
         public string LogInPW = "";
 
-        private String[] AdminFilelines;
+        private String[] adminFilelines;
         private String[] doctorFilelines;
         private String[] patientFilelines;
+        private String[] recordedAppointments;
+
+        private String[] fileTest;
 
         private String correctAdminID = "00001";
         private String correctAdminPW = "12345678";
@@ -104,6 +113,8 @@ namespace TestProgram
                         //Console.WriteLine("The system is now at Admin state");
                         //Console.ReadKey();
 
+                        //fileTest = FileManager.ReadStringArrayFromFile("test.txt");
+
                         Admin admin = new Admin(LogInID, adminName);
                         admin.MainMenu();
 
@@ -136,6 +147,9 @@ namespace TestProgram
 
         public void TestLogInCredentials(String LogInID, String LogInPW)
         {
+
+            adminFilelines = FileManager.ReadStringArrayFromFile("Admins.txt");
+
             if (LogInID == null && LogInPW == null) 
             {
                 Console.WriteLine("Empty Log In Credentials! \nPress any keys to retry");
@@ -144,14 +158,45 @@ namespace TestProgram
                 return;
                 //
             }
-            else if (LogInID != correctAdminID && LogInID != correctDoctorID && LogInID != correctPatientID)
+
+            foreach(string adminDetail in adminFilelines)
+            {
+                if (!adminDetail[1].Equals(LogInID))
+                {
+                    //Console.WriteLine("Incorrect Log In ID! \nPress any keys to retry");
+                    //Console.ReadKey();
+                    Console.Clear();
+                    //return;
+                    //Console.ReadKey();
+                }
+                else if (!adminDetail[2].Equals(LogInPW))
+                {
+                    //Console.WriteLine("Incorrect Password! \nPress any keys to retry");
+                    //Console.ReadKey();
+                    Console.Clear();
+                    //return;
+                }
+                else
+                {
+                    currentUserType = userType.Admin;
+                    LoggedIn = !LoggedIn;
+                    //Console.ReadKey();
+                    Console.Clear();
+                    return;
+                }
+                //Console.WriteLine("You now have successfully logged in as: ADMIN \nPress any keys to continue. ");
+                
+            }
+            
+
+            /*else if (LogInID != correctAdminID && LogInID != correctDoctorID && LogInID != correctPatientID)
             {
                 Console.WriteLine("Incorrect Log In ID! \nPress any keys to retry");
                 Console.ReadKey();
                 Console.Clear();
                 return;
                 //Console.ReadKey();
-            }
+            }*/
             /*else if (LogInPW != correctAdminID && LogInPW != correctDoctorID && LogInPW != correctPatientID)
             {
                 Console.WriteLine("Incorrect Log In Password! \nPress any keys to retry");
@@ -161,7 +206,7 @@ namespace TestProgram
                 //Console.ReadKey();
             }*/
 
-            if (LogInID == correctAdminID && LogInPW == correctAdminPW)
+            /*if (LogInID == correctAdminID && LogInPW == correctAdminPW)
             {
                 //Console.WriteLine("You now have successfully logged in as: ADMIN \nPress any keys to continue. ");
                 currentUserType = userType.Admin;
@@ -169,7 +214,7 @@ namespace TestProgram
                 //Console.ReadKey();
                 Console.Clear();
                 return;
-            }
+            }*/
 
             if (LogInID == correctDoctorID && LogInPW == correctDoctorPW)
             {
