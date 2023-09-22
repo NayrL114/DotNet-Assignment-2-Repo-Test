@@ -19,20 +19,24 @@ namespace ConsoleApp1
             if (File.Exists(path)) { }
         }
 
-        public static String[] ReadStringArrayFromFile(string path)
+        //public static String[] ReadStringArrayFromFile(string path)
+        public static List<String> ReadStringListFromFile(string path)
         {
             //return new string[0];
             try
             {
-                string[] lines;
+                //string[] lines;
+                List<String> lines = new List<String>(); 
 
                 StreamReader fileContent = new StreamReader(path);
+                //fileContent.
                 //fileContent.
 
                 while (!fileContent.EndOfStream)
                 {
                     //string line = fileContent.ReadLine();
-                    lines.Append(fileContent.ReadLine());
+                    //lines.Append(fileContent.ReadLine());
+                    lines.Add(fileContent.ReadLine());
                 }
 
                 return lines;
@@ -59,9 +63,11 @@ namespace ConsoleApp1
                 Console.WriteLine(e.Message);
                 // Write the code to Read a key from user   
                 Console.ReadKey();
-                return new string[0];
+                //return new string[0];
+                return new List<String>();
             }
-            return new string[0];
+            //return new string[0];
+            //return new List<String>();
         }
     }
 }
