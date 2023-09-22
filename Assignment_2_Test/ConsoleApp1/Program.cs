@@ -70,15 +70,18 @@ namespace TestProgram
 
         //private String[] adminFilelines;
         private List<String> adminFileLines;
-        private String[] doctorFilelines;
-        private String[] patientFilelines;
-        private String[] recordedAppointments;
+        //private String[] doctorFilelines;
+        private List<String> doctorFileLines;
+        //private String[] patientFilelines;
+        private List<String> patientFileLines;
+        //private String[] recordedAppointments;
+        private List<String> bookedAppointments;
 
-        private List<Admin> adminList;
+        //private List<Admin> adminList;
 
-        private String[] fileTest;
+        private String[] LoggedInUserDetails;
 
-        private String correctAdminID = "00001";
+        /*private String correctAdminID = "00001";
         private String correctAdminPW = "12345678";
         private String adminName = "Ryan";
 
@@ -88,18 +91,28 @@ namespace TestProgram
 
         private String correctPatientID = "11001";
         private String correctPatientPW = "11223344";
-        private String patientName = "Pan";
+        private String patientName = "Pan";*/
 
-        private String name;
+        //private String name;
 
         private bool LoggedIn;
         public void PrintLogInMenu()
         {
+            // Below codes will initilise all the lists containing all user details
+            /*adminFileLines = FileManager.ReadStringListFromFile("Admins.txt");
+            doctorFileLines = FileManager.ReadStringListFromFile("Doctors.txt");
+            patientFileLines = FileManager.ReadStringListFromFile("Patients.txt");*/
 
-            adminFileLines = FileManager.ReadStringListFromFile("Admins.txt");
+            //patientFileLines = new List<String>();
 
             do
             {
+
+                // Below codes will initilise all the lists containing all user details
+                adminFileLines = FileManager.ReadStringListFromFile("Admins.txt");
+                doctorFileLines = FileManager.ReadStringListFromFile("Doctors.txt");
+                patientFileLines = FileManager.ReadStringListFromFile("Patients.txt");
+
                 Console.WriteLine("Welcome to DOTNET Hospital Management System");
                 Console.Write("ID: ");
                 //String LogInID = Console.ReadLine();
@@ -123,30 +136,60 @@ namespace TestProgram
 
                         //fileTest = FileManager.ReadStringArrayFromFile("test.txt");
 
-                        Admin admin = new Admin(LogInID, name);
+                        Admin admin = new Admin(LogInID, LoggedInUserDetails[0]);
+                        // CONSIDER UPDATING CONSTRUCTORS TO ACCEPT STRING ARRAY !!!!!!!!!!
                         admin.MainMenu();
 
                         // Below code executes when user chose log out from admin menu
                         LoggedIn = !LoggedIn;// This should set the log in state to false
                         currentUserType = userType.LoggedOut;
+                        LoggedInUserDetails = new string[0];
 
                         Console.Clear();
                         //PrintLogInMenu();
 
                         break;
                     case userType.Doctor:
-                        Console.WriteLine("The system is now at Doctor state");
-                        Console.ReadKey();
+                        /*Console.WriteLine("The system is now at Doctor state");
+                        Console.ReadKey();*/
+
+                        Doctor doctor = new Doctor(LogInID, LoggedInUserDetails[0]);
+                        doctor.MainMenu();
+
+                        // Below code executes when user chose log out from admin menu
+                        LoggedIn = !LoggedIn;// This should set the log in state to false
+                        currentUserType = userType.LoggedOut;
+                        LoggedInUserDetails = new string[0];
+
                         break;
                     case userType.Patient:
-                        Console.WriteLine("The system is now at Patient state");
-                        Console.ReadKey();
+                        /*Console.WriteLine("The system is now at Patient state");
+                        Console.ReadKey();*/
+
+
+                        Patient patient = new Patient(LogInID, LoggedInUserDetails[0]);
+                        patient.MainMenu();
+
+                        // Below code executes when user chose log out from admin menu
+                        LoggedIn = !LoggedIn;// This should set the log in state to false
+                        currentUserType = userType.LoggedOut;
+                        LoggedInUserDetails = new string[0];
+
+
                         break;
                     default:
                         Console.WriteLine("Here is the Default state ;p");
                         Console.ReadKey();
                         break;
                 }
+
+                // Reset all lists holding log in details, 
+                // so if admin created a new doctor/patient, 
+                // and logged out for logging in as the new doctor/patient, 
+                // the new login detail lists will get updated with new file reading at the beginning of do.
+                adminFileLines = new List<String>();
+                doctorFileLines = new List<String>();
+                patientFileLines = new List<String>();
             }
             while (!LoggedIn); 
 
@@ -184,8 +227,8 @@ namespace TestProgram
                         Console.WriteLine("Autenticated as Admin {0}", details[0]);
                         Console.ReadKey();
                         Console.Clear();
-                        name = details[0];
-                        
+                        //name = details[0];
+                        LoggedInUserDetails = details;
                         //Admin admin = new Admin(details[1], details[0]);
                         currentUserType = userType.Admin;
                         LoggedIn = !LoggedIn;
@@ -207,73 +250,137 @@ namespace TestProgram
                 /*Console.WriteLine("Incorrect user ID! \nPress any keys to retry");
                 Console.ReadKey();
                 Console.Clear();*/
-                //return;
-
-                //adminList.Add(new Admin(details[1], details[0]));
-                /*foreach (string detail in details)
-                {
-                    //Console.WriteLine(detail);
-                }*/
-
-
-                /*if (!adminDetail[1].Equals(LogInID))
-                {
-                    //Console.WriteLine("Incorrect Log In ID! \nPress any keys to retry");
-                    //Console.ReadKey();
-                    Console.Clear();
-                    //return;
-                    //Console.ReadKey();
-                }
-                else if (!adminDetail[2].Equals(LogInPW))
-                {
-                    //Console.WriteLine("Incorrect Password! \nPress any keys to retry");
-                    //Console.ReadKey();
-                    Console.Clear();
-                    //return;
-                }
-                else
-                {
-                    currentUserType = userType.Admin;
-                    LoggedIn = !LoggedIn;
-                    //Console.ReadKey();
-                    Console.Clear();
-                    return;
-                }*/
-                //Console.WriteLine("You now have successfully logged in as: ADMIN \nPress any keys to continue. ");
+                //return;                
 
             }
 
-            /*Console.WriteLine("All strings from readlist function should be printed");
-            Console.ReadKey();*/
-
-            /*else if (LogInID != correctAdminID && LogInID != correctDoctorID && LogInID != correctPatientID)
+            foreach (string adminDetail in adminFileLines)
             {
-                Console.WriteLine("Incorrect Log In ID! \nPress any keys to retry");
+                //Console.WriteLine($"{adminDetail}");
+                //Console.WriteLine("{0}", adminDetail);
+
+                String[] details = adminDetail.Split(',');
+
+                if (LogInID == details[1])
+                {
+                    if (LogInPW == details[2])
+                    {
+                        // If ID and passwords all matches
+                        Console.WriteLine("Autenticated as Admin {0}", details[0]);
+                        Console.ReadKey();
+                        Console.Clear();
+                        //name = details[0];
+                        LoggedInUserDetails = details;
+                        //Admin admin = new Admin(details[1], details[0]);
+                        currentUserType = userType.Admin;
+                        LoggedIn = !LoggedIn;
+                        //admin.MainMenu();
+                        return;
+                    }
+                    else
+                    {
+                        // If password does not match
+                        Console.WriteLine("Incorrect Password! \nPress any keys to retry");
+                        Console.ReadKey();
+                        Console.Clear();
+                        return;
+                    }
+                }
+
+                // If the code reaches here,
+                // that means there are no matching IDs in the txt file
+                /*Console.WriteLine("Incorrect user ID! \nPress any keys to retry");
                 Console.ReadKey();
-                Console.Clear();
-                return;
-                //Console.ReadKey();
-            }*/
-            /*else if (LogInPW != correctAdminID && LogInPW != correctDoctorID && LogInPW != correctPatientID)
+                Console.Clear();*/
+                //return;                
+
+            }
+
+            foreach (string doctorDetail in doctorFileLines)
             {
-                Console.WriteLine("Incorrect Log In Password! \nPress any keys to retry");
+                //Console.WriteLine($"{adminDetail}");
+                //Console.WriteLine("{0}", adminDetail);
+
+                String[] details = doctorDetail.Split(',');
+
+                if (LogInID == details[1])
+                {
+                    if (LogInPW == details[2])
+                    {
+                        // If ID and passwords all matches
+                        Console.WriteLine("Autenticated as Doctor {0}", details[0]);
+                        Console.ReadKey();
+                        Console.Clear();
+                        //name = details[0];
+                        LoggedInUserDetails = details;
+                        //Admin admin = new Admin(details[1], details[0]);
+                        currentUserType = userType.Doctor;
+                        LoggedIn = !LoggedIn;
+                        //admin.MainMenu();
+                        return;
+                    }
+                    else
+                    {
+                        // If password does not match
+                        Console.WriteLine("Incorrect Password! \nPress any keys to retry");
+                        Console.ReadKey();
+                        Console.Clear();
+                        return;
+                    }
+                }
+
+                // If the code reaches here,
+                // that means there are no matching IDs in the txt file
+                /*Console.WriteLine("Incorrect user ID! \nPress any keys to retry");
                 Console.ReadKey();
-                Console.Clear();
-                return;
-                //Console.ReadKey();
-            }*/
+                Console.Clear();*/
+                //return;                
 
-            /*if (LogInID == correctAdminID && LogInPW == correctAdminPW)
+            }
+
+            foreach (string patientDetail in patientFileLines)
             {
-                //Console.WriteLine("You now have successfully logged in as: ADMIN \nPress any keys to continue. ");
-                currentUserType = userType.Admin;
-                LoggedIn = !LoggedIn;
-                //Console.ReadKey();
-                Console.Clear();
-                return;
-            }*/
+                //Console.WriteLine($"{adminDetail}");
+                //Console.WriteLine("{0}", adminDetail);
 
-            if (LogInID == correctDoctorID && LogInPW == correctDoctorPW)
+                String[] details = patientDetail.Split(',');
+
+                if (LogInID == details[1])
+                {
+                    if (LogInPW == details[2])
+                    {
+                        // If ID and passwords all matches
+                        Console.WriteLine("Autenticated as Patient {0}", details[0]);
+                        Console.ReadKey();
+                        Console.Clear();
+                        //name = details[0];
+                        LoggedInUserDetails = details;
+                        //Admin admin = new Admin(details[1], details[0]);
+                        currentUserType = userType.Patient;
+                        LoggedIn = !LoggedIn;
+                        //admin.MainMenu();
+                        return;
+                    }
+                    else
+                    {
+                        // If password does not match
+                        Console.WriteLine("Incorrect Password! \nPress any keys to retry");
+                        Console.ReadKey();
+                        Console.Clear();
+                        return;
+                    }
+                }
+
+                // If the code reaches here,
+                // that means there are no matching IDs in the txt file
+                /*Console.WriteLine("Incorrect user ID! \nPress any keys to retry");
+                Console.ReadKey();
+                Console.Clear();*/
+                //return;                
+
+            }
+
+            /*if (LogInID == correctDoctorID && LogInPW == correctDoctorPW)
             {
                 Console.WriteLine("You now have successfully logged in as: DOCTOR \nPress any keys to continue. ");
                 currentUserType = userType.Doctor;
@@ -291,7 +398,11 @@ namespace TestProgram
                 Console.ReadKey();
                 Console.Clear();
                 return;
-            }
+            }*/
+
+
+            // If the code reaches here,
+            // that means there are no matching IDs in the txt file
 
             //LoggedIn = !LoggedIn; // This should set LoggedIn to true at all times. 
             /*Console.WriteLine("Wrong Password! \nPress any keys to retry. ");*/
