@@ -16,6 +16,12 @@ namespace ConsoleApp1
             this.Name = name;
         }
 
+        public Doctor(string doctor_ID, string[] doctorDetails)// :base(Name)
+        {
+            this.Doctor_ID = doctor_ID;
+            this.Name = doctorDetails[0];
+        }
+
         public void MainMenu()
         {
             Console.WriteLine("This would display the main menu for the Doctor");

@@ -17,6 +17,12 @@ namespace ConsoleApp1
             this.Name = name;
         }
 
+        public Patient(string patient_ID, string[] patientDetails)
+        {
+            this.Patient_ID = patient_ID;
+            this.Name = patientDetails[0];
+        }
+
         public void MainMenu()
         {
             Console.WriteLine("This would display the main menu for the patient");

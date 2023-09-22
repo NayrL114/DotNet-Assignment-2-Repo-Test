@@ -113,6 +113,7 @@ namespace TestProgram
                 doctorFileLines = FileManager.ReadStringListFromFile("Doctors.txt");
                 patientFileLines = FileManager.ReadStringListFromFile("Patients.txt");
 
+                // Asking users to input login details
                 Console.WriteLine("Welcome to DOTNET Hospital Management System");
                 Console.Write("ID: ");
                 //String LogInID = Console.ReadLine();
@@ -121,8 +122,10 @@ namespace TestProgram
                 //String LogInPW = Console.ReadLine();
                 LogInPW = Console.ReadLine();
 
+                // Change the currentUserType enum through authenticating user input's login details
                 TestLogInCredentials(LogInID, LogInPW);
 
+                // Go to different user type's own menu
                 switch (currentUserType)
                 {
                     case userType.LoggedOut:
@@ -136,7 +139,8 @@ namespace TestProgram
 
                         //fileTest = FileManager.ReadStringArrayFromFile("test.txt");
 
-                        Admin admin = new Admin(LogInID, LoggedInUserDetails[0]);
+                        //Admin admin = new Admin(LogInID, LoggedInUserDetails[0]);
+                        Admin admin = new Admin(LogInID, LoggedInUserDetails);
                         // CONSIDER UPDATING CONSTRUCTORS TO ACCEPT STRING ARRAY !!!!!!!!!!
                         admin.MainMenu();
 
@@ -153,7 +157,8 @@ namespace TestProgram
                         /*Console.WriteLine("The system is now at Doctor state");
                         Console.ReadKey();*/
 
-                        Doctor doctor = new Doctor(LogInID, LoggedInUserDetails[0]);
+                        //Doctor doctor = new Doctor(LogInID, LoggedInUserDetails[0]);
+                        Doctor doctor = new Doctor(LogInID, LoggedInUserDetails);
                         doctor.MainMenu();
 
                         // Below code executes when user chose log out from admin menu
@@ -166,15 +171,14 @@ namespace TestProgram
                         /*Console.WriteLine("The system is now at Patient state");
                         Console.ReadKey();*/
 
-
-                        Patient patient = new Patient(LogInID, LoggedInUserDetails[0]);
+                        /*Patient patient = new Patient(LogInID, LoggedInUserDetails[0]);*/
+                        Patient patient = new Patient(LogInID, LoggedInUserDetails);
                         patient.MainMenu();
 
                         // Below code executes when user chose log out from admin menu
                         LoggedIn = !LoggedIn;// This should set the log in state to false
                         currentUserType = userType.LoggedOut;
                         LoggedInUserDetails = new string[0];
-
 
                         break;
                     default:
@@ -192,8 +196,7 @@ namespace TestProgram
                 patientFileLines = new List<String>();
             }
             while (!LoggedIn); 
-
-            
+                       
 
         }
 
@@ -203,6 +206,7 @@ namespace TestProgram
             //adminFilelines = FileManager.ReadStringArrayFromFile("Admins.txt");
             /*adminFileLines = FileManager.ReadStringListFromFile("Admins.txt");*/
 
+            // Terminate of both ID and passwords are empty inputs
             if (LogInID == null && LogInPW == null) 
             {
                 Console.WriteLine("Empty Log In Credentials! \nPress any keys to retry");
@@ -212,6 +216,7 @@ namespace TestProgram
                 //
             }
 
+            // Autenticating for admins
             foreach(string adminDetail in adminFileLines)
             {
                 //Console.WriteLine($"{adminDetail}");
@@ -254,7 +259,8 @@ namespace TestProgram
 
             }
 
-            foreach (string adminDetail in adminFileLines)
+            // Autenticating for admins
+            /*foreach (string adminDetail in adminFileLines)
             {
                 //Console.WriteLine($"{adminDetail}");
                 //Console.WriteLine("{0}", adminDetail);
@@ -289,13 +295,14 @@ namespace TestProgram
 
                 // If the code reaches here,
                 // that means there are no matching IDs in the txt file
-                /*Console.WriteLine("Incorrect user ID! \nPress any keys to retry");
+                *//*Console.WriteLine("Incorrect user ID! \nPress any keys to retry");
                 Console.ReadKey();
-                Console.Clear();*/
+                Console.Clear();*//*
                 //return;                
 
-            }
+            }*/
 
+            // Autenticating for doctors
             foreach (string doctorDetail in doctorFileLines)
             {
                 //Console.WriteLine($"{adminDetail}");
@@ -338,6 +345,7 @@ namespace TestProgram
 
             }
 
+            // Autenticating for patients
             foreach (string patientDetail in patientFileLines)
             {
                 //Console.WriteLine($"{adminDetail}");

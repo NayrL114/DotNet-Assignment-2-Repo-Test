@@ -68,6 +68,57 @@ namespace ConsoleApp1
             }
             //return new string[0];
             //return new List<String>();
+        }// end of: ReadStringListFromFile
+
+        public static void AppendToFileEnd(string path, List<String> inputDetails)
+        {
+            //return new string[0];
+            try
+            {
+
+                // ADD NEW PATIENT TO THE END OF THE FILE LINE
+
+                //string[] lines;
+                //List<String> lines = new List<String>();
+
+                //StreamReader fileContent = new StreamReader(path);
+                //fileContent.
+                //fileContent.
+
+                /*while (!fileContent.EndOfStream)
+                {
+                    //string line = fileContent.ReadLine();
+                    //lines.Append(fileContent.ReadLine());
+                    lines.Add(fileContent.ReadLine());
+                }*/
+
+                //return lines;
+
+                /*string[] lines = System.IO.File.ReadAllLines(path);
+
+                foreach (String line in lines)
+                {
+                    string[] splits = line.Split(',');
+                    //Console.WriteLine
+                    foreach (String split in splits)
+                    {
+                        Console.WriteLine(split);
+                    }
+
+                    Console.ReadKey();
+                    Console.Clear();
+                    return splits;*/
+                //}
+            }
+            catch (FileNotFoundException e)
+            {
+                // Write the code to Display the error message
+                Console.WriteLine(e.Message);
+                // Write the code to Read a key from user   
+                Console.ReadKey();
+                //return new string[0];
+                //return new List<String>();
+            }
         }
     }
 }

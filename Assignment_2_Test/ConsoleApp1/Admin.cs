@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 using System.Xml.Linq;
 
 namespace ConsoleApp1
@@ -20,6 +21,12 @@ namespace ConsoleApp1
         {
             this.Admin_ID = admin_ID;
             this.Name = name;
+        }
+
+        public Admin(string admin_ID, string[] adminDetails)
+        {
+            this.Admin_ID = admin_ID;
+            this.Name = adminDetails[0];
         }
 
         public void MainMenu()
@@ -56,6 +63,12 @@ namespace ConsoleApp1
 
                     switch (MainMenuInput)
                     {
+                        case 6:
+                            Console.WriteLine("Adding a new patient");
+                            Console.ReadKey();
+                            Console.Clear();
+                            AddPatient();
+                            break;
                         case 7:
                             Console.WriteLine("\nLogging out, Thank you!\nPress any keys to continue");
                             Console.ReadKey();
@@ -116,6 +129,96 @@ namespace ConsoleApp1
             while (LoggedIn);           
 
             
+        }// end of MainMenu()
+
+        public void AddPatient()
+        {
+            Console.WriteLine("Inside AddPatient() function, input details");
+            Console.ReadKey();
+
+            List<String> inputDetails = new List<String>();
+
+            bool comfirmAdding = false;
+            bool finishedAdding = false;
+
+            do
+            {
+                Console.WriteLine("Input Patient Name: ");
+                inputDetails.Add(Console.ReadLine());
+                Console.WriteLine("Input Patient ID: ");
+                inputDetails.Add(Console.ReadLine());
+                Console.WriteLine("Input Patient Password: ");
+                inputDetails.Add(Console.ReadLine());
+
+                do
+                {
+                    Console.WriteLine("Comfirm Adding? Y/N");
+                    String input = Console.ReadLine();
+                    if (input == null || input == "")
+                    {
+                        Console.WriteLine("Invalid Input, press any keys to try again.");
+                        Console.ReadKey();
+                        Console.Clear();
+                    }
+                    else if (input == "N")
+                    {
+                        bool retryValid = false;
+                        do
+                        {
+                            Console.WriteLine("Do you want to input details again? Y/N");
+                            String inputTwo = Console.ReadLine();
+                            if (inputTwo == null || inputTwo == "")
+                            {
+                                Console.WriteLine("Invalid Input, press any keys to try again.");
+                                Console.ReadKey();
+                                Console.Clear();
+                            }
+                            else if (inputTwo == "N")
+                            {
+                                Console.WriteLine("Cancelling adding patient operation.\nPress any keys to return to main menu. ");
+                                Console.ReadKey();
+                                Console.Clear();
+                                return;
+                                /*retryValid = true;
+                                comfirmAdding = true;
+                                finishedAdding = true;*/
+                            }
+                            else if (inputTwo == "Y")
+                            {
+                                Console.WriteLine("Adding patient again with new detail inputs. ");
+                                Console.ReadKey();
+                                Console.Clear();
+                                inputDetails = new List<String>();
+                                retryValid = true;
+                                comfirmAdding = true;
+                            }
+                        }
+                        while (!retryValid);
+                    }
+                    else if (input == "Y")
+                    {
+                        Console.WriteLine("Comfirmed adding.\nPress any keys to continue.");
+                        comfirmAdding = true;
+                        finishedAdding = true;
+                    }
+                }
+                while (!comfirmAdding);
+            }
+            while (!finishedAdding);
+
+
+            Console.WriteLine("Added patients to database.\nPress any keys to continue.");
+            
+            foreach (string detail in inputDetails)
+            {
+                Console.WriteLine("{0}", detail);
+            }
+
+            Console.ReadKey();
+
+            //FileManager.AppendToFileEnd("Patient.txt", inputDetails);
         }
-    }
+
+
+    }// end of internal class Admin: User
 }
