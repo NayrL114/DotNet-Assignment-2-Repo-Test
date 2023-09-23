@@ -8,7 +8,7 @@ namespace ConsoleApp1
 {
     internal class Doctor: User
     {
-        private string DoctorID;
+        private string DoctorID {  get; set; }
 
         public Doctor(string doctor_ID, string name)// :base(Name)
         {
@@ -25,7 +25,7 @@ namespace ConsoleApp1
         public void MainMenu()
         {
             Console.WriteLine("This would display the main menu for the Doctor");
-            Console.WriteLine("The Doctor ID is {0} and the Name is {1}", this.Doctor_ID, this.Name);
+            Console.WriteLine("The Doctor ID is {0} and the Name is {1}", this.DoctorID, this.Name);
         }
     }
 }

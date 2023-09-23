@@ -46,6 +46,8 @@ namespace TestProgram
 
             //StartProgram();
 
+            Util util = new Util();
+
             TextMenu textMenu = new TextMenu();
             textMenu.PrintLogInMenu(); 
 
@@ -112,6 +114,8 @@ namespace TestProgram
                 adminFileLines = FileManager.ReadStringListFromFile("Admins.txt");
                 doctorFileLines = FileManager.ReadStringListFromFile("Doctors.txt");
                 patientFileLines = FileManager.ReadStringListFromFile("Patients.txt");
+
+                Util.InitialiseUserData();
 
                 // Asking users to input login details
                 Console.WriteLine("Welcome to DOTNET Hospital Management System");
@@ -194,6 +198,8 @@ namespace TestProgram
                 adminFileLines = new List<String>();
                 doctorFileLines = new List<String>();
                 patientFileLines = new List<String>();
+
+                Util.WipeUserData();
             }
             while (!LoggedIn); 
                        

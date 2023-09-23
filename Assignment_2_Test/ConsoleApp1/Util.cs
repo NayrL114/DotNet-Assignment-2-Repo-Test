@@ -12,7 +12,39 @@ namespace ConsoleApp1
         public List<Doctor> doctorList = new List<Doctor>();
         public List<Patient> patientList = new List<Patient>();
 
-        public static Doctor GetDoctorByID(string ID)
+        /*//private String[] adminFilelines;
+        public List<String> adminFileLines;
+        //private String[] doctorFilelines;
+        public List<String> doctorFileLines;
+        //private String[] patientFilelines;
+        public List<String> patientFileLines;
+        //private String[] recordedAppointments;
+        public List<String> bookedAppointments;*/
+
+        // ALL FUNCTION WAS STATIC IN PREVIOUS UTIL CLASS DESIGN
+
+        public void InitialiseUserData()
+        {
+            //List<String> adminFileLines = FileManager.ReadStringListFromFile("Admins.txt");
+            //List<String> doctorFileLines = FileManager.ReadStringListFromFile("Doctors.txt");
+            List<String> patientFileLines = FileManager.ReadStringListFromFile("Patients.txt");
+
+            foreach (String details in patientFileLines)
+            {
+                string[] detail = details.Split(',');
+                Patient patient = new Patient(detail[2], detail);
+                patientList.Add(patient);
+            }
+        }
+
+        public void WipeUserData()
+        {
+            adminList = new List<Admin>();
+            doctorList = new List<Doctor>();
+            patientList = new List<Patient>();
+        }
+
+        public Doctor GetDoctorByID(string ID)
         {
             if (doctorList.Count == 0) 
             {
@@ -29,7 +61,7 @@ namespace ConsoleApp1
             throw new Exception("Doctor not found");
         }
 
-        public static Patient GetPatientByID(string ID)
+        public Patient GetPatientByID(string ID)
         {
             if (patientList.Count == 0)
             {
@@ -38,7 +70,7 @@ namespace ConsoleApp1
 
             for (int i = 0; i < patientList.Count; i++)
             {
-                if (patientList[i].DoctorID == ID)
+                if (patientList[i].Patient_ID == ID)
                 {
                     return patientList[i];
                 }
@@ -46,8 +78,10 @@ namespace ConsoleApp1
             throw new Exception("Patient not found");
         }
 
-        public static bool CheckPatientExistsByID(string ID)
+        public bool CheckPatientExistsByID(string ID)
         {
+            // Return TRUE if exists, 
+            // Return FALSE if not exists
             if (patientList.Count == 0)
             {
                 //throw new Exception("Patient list is not initialised");
@@ -56,7 +90,7 @@ namespace ConsoleApp1
 
             for (int i = 0; i < patientList.Count; i++)
             {
-                if (patientList[i].DoctorID == ID)
+                if (patientList[i].Patient_ID == ID)
                 {
                     //return patientList[i];
                     return true;

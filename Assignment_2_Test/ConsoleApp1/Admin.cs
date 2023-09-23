@@ -145,8 +145,23 @@ namespace ConsoleApp1
             {
                 Console.WriteLine("Input Patient Name: ");
                 inputDetails.Add(Console.ReadLine());
+
                 Console.WriteLine("Input Patient ID: ");
-                inputDetails.Add(Console.ReadLine());
+                String inputId = Console.ReadLine();
+                if (inputId != null && inputId != ""){
+                    if (!Util.CheckPatientExistsByID(inputId))
+                    {
+                        inputDetails.Add(inputId);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Patient with same ID already exists.\nPress any keys to retry");
+                        Console.ReadKey();
+                        Console.Clear();
+                        continue;
+                    }
+                }
+                
                 Console.WriteLine("Input Patient Password: ");
                 inputDetails.Add(Console.ReadLine());
 
