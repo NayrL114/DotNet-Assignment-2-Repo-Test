@@ -207,16 +207,29 @@ namespace ConsoleApp1
             while (!finishedAdding);
 
 
-            Console.WriteLine("Added patients to database.\nPress any keys to continue.");
-            
+            //Console.WriteLine("Added patients to database.\nPress any keys to continue.");
+            String finalAdding = "\n";
+
             foreach (string detail in inputDetails)
             {
                 Console.WriteLine("{0}", detail);
+                finalAdding += detail;
+                finalAdding += ",";
             }
+
+            /*Console.WriteLine(finalAdding.Length);
+            finalAdding.Remove(finalAdding.Length - 1);
+            finalAdding.Remove(finalAdding.Length - 1);
+            finalAdding.Remove(finalAdding.Length - 1);*/
+
+            Console.WriteLine(finalAdding); 
 
             Console.ReadKey();
 
-            //FileManager.AppendToFileEnd("Patient.txt", inputDetails);
+            //FileManager.AppendToFileEnd("Patients.txt", finalAdding);
+
+            Console.Clear();
+
         }
 
 

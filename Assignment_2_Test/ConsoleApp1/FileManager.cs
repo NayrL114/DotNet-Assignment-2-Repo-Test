@@ -39,6 +39,8 @@ namespace ConsoleApp1
                     lines.Add(fileContent.ReadLine());
                 }
 
+                fileContent.Close();
+
                 return lines;
 
                 /*string[] lines = System.IO.File.ReadAllLines(path);
@@ -70,46 +72,54 @@ namespace ConsoleApp1
             //return new List<String>();
         }// end of: ReadStringListFromFile
 
-        public static void AppendToFileEnd(string path, List<String> inputDetails)
+        //public static void AppendToFileEnd(string path, List<String> inputDetails)
+        public static void AppendToFileEnd(string path, string inputDetails)
         {
             //return new string[0];
-            try
+
+            //File.AppendAllLines(path, inputDetails);
+
+            File.AppendAllText(path, inputDetails);
+
+            //try
+            //{
+
+            // ADD NEW PATIENT TO THE END OF THE FILE LINE
+
+
+
+            //string[] lines;
+            //List<String> lines = new List<String>();
+
+            //StreamReader fileContent = new StreamReader(path);
+            //fileContent.
+            //fileContent.
+
+            /*while (!fileContent.EndOfStream)
             {
+                //string line = fileContent.ReadLine();
+                //lines.Append(fileContent.ReadLine());
+                lines.Add(fileContent.ReadLine());
+            }*/
 
-                // ADD NEW PATIENT TO THE END OF THE FILE LINE
+            //return lines;
 
-                //string[] lines;
-                //List<String> lines = new List<String>();
+            /*string[] lines = System.IO.File.ReadAllLines(path);
 
-                //StreamReader fileContent = new StreamReader(path);
-                //fileContent.
-                //fileContent.
-
-                /*while (!fileContent.EndOfStream)
+            foreach (String line in lines)
+            {
+                string[] splits = line.Split(',');
+                //Console.WriteLine
+                foreach (String split in splits)
                 {
-                    //string line = fileContent.ReadLine();
-                    //lines.Append(fileContent.ReadLine());
-                    lines.Add(fileContent.ReadLine());
-                }*/
+                    Console.WriteLine(split);
+                }
 
-                //return lines;
-
-                /*string[] lines = System.IO.File.ReadAllLines(path);
-
-                foreach (String line in lines)
-                {
-                    string[] splits = line.Split(',');
-                    //Console.WriteLine
-                    foreach (String split in splits)
-                    {
-                        Console.WriteLine(split);
-                    }
-
-                    Console.ReadKey();
-                    Console.Clear();
-                    return splits;*/
-                //}
-            }
+                Console.ReadKey();
+                Console.Clear();
+                return splits;*/
+            //}
+            /*}
             catch (FileNotFoundException e)
             {
                 // Write the code to Display the error message
@@ -118,7 +128,7 @@ namespace ConsoleApp1
                 Console.ReadKey();
                 //return new string[0];
                 //return new List<String>();
-            }
+            }*/
         }
     }
 }
