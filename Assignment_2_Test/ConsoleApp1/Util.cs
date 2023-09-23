@@ -44,7 +44,16 @@ namespace ConsoleApp1
             patientList = new List<Patient>();
         }
 
-        public Doctor GetDoctorByID(string ID)
+        public static string GeneratePatientID()
+        {
+            return "114514";
+            /*string patientID = "";
+            patientID += "0";
+            patientID += "0";*/
+            //patientID += Random.Next(0)
+        }
+
+        /*public Doctor GetDoctorByID(string ID)
         {
             if (doctorList.Count == 0) 
             {
@@ -59,9 +68,9 @@ namespace ConsoleApp1
                 }
             }
             throw new Exception("Doctor not found");
-        }
+        }*/
 
-        public Patient GetPatientByID(string ID)
+        /*public Patient GetPatientByID(string ID)
         {
             if (patientList.Count == 0)
             {
@@ -76,9 +85,9 @@ namespace ConsoleApp1
                 }
             }
             throw new Exception("Patient not found");
-        }
+        }*/
 
-        public bool CheckPatientExistsByID(string ID)
+        /*public bool CheckPatientExistsByID(string ID)
         {
             // Return TRUE if exists, 
             // Return FALSE if not exists
@@ -98,7 +107,7 @@ namespace ConsoleApp1
             }
             //throw new Exception("Patient not found");
             return false;
-        }
+        }*/
 
     }
 }

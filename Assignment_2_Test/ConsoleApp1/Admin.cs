@@ -147,8 +147,9 @@ namespace ConsoleApp1
                 inputDetails.Add(Console.ReadLine());
 
                 Console.WriteLine("Input Patient ID: ");
-                String inputId = Console.ReadLine();
-                if (inputId != null && inputId != ""){
+                inputDetails.Add(Console.ReadLine());
+                //String inputId = Console.ReadLine();
+                /*if (inputId != null && inputId != ""){
                     if (!Util.CheckPatientExistsByID(inputId))
                     {
                         inputDetails.Add(inputId);
@@ -160,8 +161,8 @@ namespace ConsoleApp1
                         Console.Clear();
                         continue;
                     }
-                }
-                
+                }*/
+
                 Console.WriteLine("Input Patient Password: ");
                 inputDetails.Add(Console.ReadLine());
 
