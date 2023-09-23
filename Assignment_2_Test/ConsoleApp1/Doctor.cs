@@ -8,17 +8,17 @@ namespace ConsoleApp1
 {
     internal class Doctor: User
     {
-        private string Doctor_ID;
+        private string DoctorID;
 
         public Doctor(string doctor_ID, string name)// :base(Name)
         {
-            this.Doctor_ID = doctor_ID;
+            this.DoctorID = doctor_ID;
             this.Name = name;
         }
 
         public Doctor(string doctor_ID, string[] doctorDetails)// :base(Name)
         {
-            this.Doctor_ID = doctor_ID;
+            this.DoctorID = doctor_ID;
             this.Name = doctorDetails[0];
         }
 

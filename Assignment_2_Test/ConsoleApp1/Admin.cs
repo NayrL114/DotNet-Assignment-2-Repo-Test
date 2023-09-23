@@ -192,6 +192,10 @@ namespace ConsoleApp1
                                 retryValid = true;
                                 comfirmAdding = true;
                             }
+                            /*Console.WriteLine("Invalid Input, press any keys to try again.");
+                            Console.ReadKey();
+                            Console.Clear();*/
+                            Console.Clear();
                         }
                         while (!retryValid);
                     }
@@ -201,12 +205,15 @@ namespace ConsoleApp1
                         comfirmAdding = true;
                         finishedAdding = true;
                     }
+                    /*Console.WriteLine("Invalid Input, press any keys to try again.");
+                    Console.ReadKey();*/
+                    Console.Clear();
                 }
                 while (!comfirmAdding);
             }
             while (!finishedAdding);
 
-
+            // Creating the string line for appending into the file
             //Console.WriteLine("Added patients to database.\nPress any keys to continue.");
             String finalAdding = "\n";
 
