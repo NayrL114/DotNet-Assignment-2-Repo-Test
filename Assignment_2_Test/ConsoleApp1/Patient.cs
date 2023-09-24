@@ -20,6 +20,8 @@ namespace ConsoleApp1
         //private Doctor assignedDoctorID;
         private string assignedDoctorID;
 
+        private List<string> appointmentIDs = new List<string>();
+
         private Util util;
 
         /*public Patient(string patient_ID, string name)
@@ -45,6 +47,11 @@ namespace ConsoleApp1
             try
             {
                 this.assignedDoctorID = patientDetails[3];
+
+                for (int i = 4; i < patientDetails.Length; i++)
+                {
+                    this.appointmentIDs.Add(patientDetails[i]);
+                }
             }
             catch (IndexOutOfRangeException e)
             {
@@ -205,7 +212,9 @@ namespace ConsoleApp1
             //Console.WriteLine(appointmentDetails);
             appointmentInfo.Add(appointmentDetails);
 
-            util.AddAppointment(appointmentInfo);            
+            util.AddAppointment(appointmentInfo);
+
+            //FileManager.AppendAtTheEndOfLine("Patients.txt", Patient_ID, assignedDoctorID);
 
             Console.WriteLine("The appointment has been booked successfully.\nPress any keys to return to menu");
             Console.ReadKey();

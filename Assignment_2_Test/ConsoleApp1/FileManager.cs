@@ -96,7 +96,7 @@ namespace ConsoleApp1
                 string fullContents = File.ReadAllText(path);
 
                 //List<string> contents = fullContents.Split('\n');
-                string[] contents = fullContents.Split("\r\n");
+                string[] contents = fullContents.Split("\n");
                 // Breaking down full file content into line by line content details with comma,
 
                 for (int i = 0; i < contents.Length; i++)
@@ -164,7 +164,7 @@ namespace ConsoleApp1
                     File.AppendAllText(path, line);
                 }*/
 
-                for (int i = 0; i <= contents.Length; i++)
+                for (int i = 0; i < contents.Length; i++)
                 {                    
                     if (i != contents.Length - 1)
                     {
