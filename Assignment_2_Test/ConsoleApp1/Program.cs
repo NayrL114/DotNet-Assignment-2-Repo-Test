@@ -197,7 +197,8 @@ namespace TestProgram
                         Console.ReadKey();*/
 
                         /*Patient patient = new Patient(LogInID, LoggedInUserDetails[0]);*/
-                        Patient patient = new Patient(LogInID, LoggedInUserDetails);
+                        //Patient patient = new Patient(LogInID, LoggedInUserDetails);
+                        Patient patient = new Patient(LogInID, LoggedInUserDetails, util);
                         patient.MainMenu();
 
                         // Below code executes when user chose log out from admin menu
@@ -250,6 +251,11 @@ namespace TestProgram
                 //Console.WriteLine("{0}", adminDetail);
 
                 string[] details = adminDetail.Split(',');
+
+                if (details[0] == "")
+                {
+                    continue;
+                }
 
                 if (LogInID == details[1])
                 {
@@ -337,6 +343,11 @@ namespace TestProgram
 
                 string[] details = doctorDetail.Split(',');
 
+                if (details[0] == "")
+                {
+                    continue;
+                }
+
                 if (LogInID == details[1])
                 {
                     if (LogInPW == details[2])
@@ -379,6 +390,11 @@ namespace TestProgram
                 //Console.WriteLine("{0}", adminDetail);
 
                 string[] details = patientDetail.Split(',');
+
+                if (details[0] == "")
+                {
+                    continue;
+                }
 
                 if (LogInID == details[1])
                 {

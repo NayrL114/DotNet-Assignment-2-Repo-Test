@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -46,11 +47,15 @@ namespace ConsoleApp1
                 List<string> doctorFileLines = FileManager.ReadStringListFromFile("Doctors.txt");
                 List<string> patientFileLines = FileManager.ReadStringListFromFile("Patients.txt");
 
-                //List<string> appointmentFileLines = FileManager.ReadStringListFromFile("Appointments.txt");
+                List<string> appointmentFileLines = FileManager.ReadStringListFromFile("Appointments.txt");
 
                 foreach (string details in adminFileLines)
                 {
                     string[] detail = details.Split(',');
+                    if (detail[0] == "")
+                    {
+                        continue;
+                    }
                     Admin admin = new Admin(detail[1], detail);
                     adminList.Add(admin);
                 }
@@ -58,6 +63,10 @@ namespace ConsoleApp1
                 foreach (string details in doctorFileLines)
                 {
                     string[] detail = details.Split(',');
+                    if (detail[0] == "")
+                    {
+                        continue;
+                    }
                     Doctor doctor = new Doctor(detail[1], detail);
                     doctorList.Add(doctor);
                 }
@@ -65,22 +74,38 @@ namespace ConsoleApp1
                 foreach (string details in patientFileLines)
                 {
                     string[] detail = details.Split(',');
+                    if (detail[0] == "")
+                    {
+                        continue;
+                    }
+                    //Console.WriteLine("Creating Patient {0}", detail[0]);
                     Patient patient = new Patient(detail[1], detail);
                     patientList.Add(patient);
                 }
 
-                /*foreach (string details in appointmentFileLines)
+                foreach (string details in appointmentFileLines)
                 {
                     string[] detail = details.Split(',');
-                    Appointment appointment = new Appointment(detail[1], detail);
+                    if (detail[0] == "")
+                    {
+                        continue;
+                    }
+                    Appointment appointment = new Appointment(detail[0], 
+                        GetPatientByID(detail[1]), 
+                        GetDoctorByID(detail[2]), 
+                        detail[3]);
                     bookedAppointments.Add(appointment);
-                }*/
+                }
             }
             catch (FileNotFoundException e)
             {
-                Console.WriteLine(e.ToString());
+                Console.WriteLine(e.Message);
                 //onsole.WriteLine("File not found");
             }
+            /*catch (IndexOutOfRangeException e)
+            {
+                Console.WriteLine(e.Message);
+            }*/
             
 
             
@@ -267,6 +292,9 @@ namespace ConsoleApp1
                 bookingID += "0";
                 bookingID += "0";*/
                 //for (int i = 0; i < 5; i++) // Length for bookingID is determined to be 5 for now
+
+                isDuplicated = true;
+
                 bookingID = "";
                 bookingID += Convert.ToString(rand.Next(0, 99999));
                 //Console.WriteLine(patientID);
@@ -327,6 +355,7 @@ namespace ConsoleApp1
         /*public Doctor GetDoctorByID(string ID)
         {
             if (doctorList.Count == 0) 
+            {
             {
                 throw new Exception("Doctor list is not initialised");
             }

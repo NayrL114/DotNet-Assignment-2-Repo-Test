@@ -67,6 +67,7 @@ namespace ConsoleApp1
                 try
                 {
 
+                    util.WipeUserData();
                     util.InitialiseUserData();
 
                     MainMenuInput = Convert.ToInt32(MainMenuInputString);
@@ -115,7 +116,7 @@ namespace ConsoleApp1
                             break;
                     }
 
-                    util.WipeUserData();
+                    
                 }
                 catch (FormatException e)
                 {

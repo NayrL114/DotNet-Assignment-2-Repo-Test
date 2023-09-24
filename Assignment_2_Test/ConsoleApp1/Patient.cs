@@ -42,8 +42,15 @@ namespace ConsoleApp1
             this.Name = patientDetails[0];
             this.util = util;
 
-            this.assignedDoctorID = patientDetails[2];
+            try
+            {
+                this.assignedDoctorID = patientDetails[3];
+            }
+            catch (IndexOutOfRangeException e)
+            {
 
+            }
+                     
             /*if (patientDetails[2] != null || patientDetails[2] != "")
             {
                 assignedDoctorID = util.GetDoctorByID(patientDetails[2]);
@@ -79,7 +86,7 @@ namespace ConsoleApp1
                 //MainMenuInput = Convert.ToInt32(Console.ReadLine());
                 try
                 {
-
+                    util.WipeUserData();
                     util.InitialiseUserData();
 
                     MainMenuInput = Convert.ToInt32(MainMenuInputString);
@@ -134,7 +141,7 @@ namespace ConsoleApp1
                             break;
                     }// end of: switch block
 
-                    util.WipeUserData();
+                    
                 }
                 catch (FormatException e)
                 {
@@ -156,17 +163,21 @@ namespace ConsoleApp1
 
             appointmentInfo.Add(Patient_ID);
 
+            Console.Write("assignedDoctorID is: {0}\n", assignedDoctorID);
+            Console.ReadKey();
+
             //if (assignedDoctorID == null || assignedDoctorID.DoctorID == "")
             if (assignedDoctorID == null || assignedDoctorID == "")
             {
-                Console.WriteLine("No doctor is assigned." +
-                    "\nChoose a doctor from below by typing the corresponding doctor ID: ");
-                util.PrintAllDoctors();
                 string inputID;
 
                 // Making sure that user is entering a valid doctor ID
                 do
                 {
+                    Console.Clear();
+                    Console.WriteLine("No doctor is assigned.");
+                    util.PrintAllDoctors();
+                    Console.WriteLine("\nChoose a doctor from below by typing the corresponding doctor ID: ");                    
                     inputID = Console.ReadLine();
                 }
                 while (!util.CheckDoctorExistsByID(inputID));
@@ -180,19 +191,21 @@ namespace ConsoleApp1
                 }*/
 
                 assignedDoctorID = inputID;
+
+                FileManager.AppendAtTheEndOfLine("Patients.txt", Patient_ID, assignedDoctorID);
             }
 
             appointmentInfo.Add(assignedDoctorID);
 
-            Console.WriteLine("You are booking a new appointment with (Your Doctor's Name Here)");
+            Doctor assignedDoctor = util.GetDoctorByID(assignedDoctorID);
+
+            Console.WriteLine("You are booking a new appointment with {0}", assignedDoctor.Name);
             Console.WriteLine("Description of the appointment: ");
             string appointmentDetails = Console.ReadLine();
-            Console.WriteLine(appointmentDetails);
+            //Console.WriteLine(appointmentDetails);
             appointmentInfo.Add(appointmentDetails);
 
-            util.AddAppointment(appointmentInfo);
-
-            FileManager.AppendAtTheEndOfLine("Patient.txt", Patient_ID, assignedDoctorID);
+            util.AddAppointment(appointmentInfo);            
 
             Console.WriteLine("The appointment has been booked successfully.\nPress any keys to return to menu");
             Console.ReadKey();

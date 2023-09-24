@@ -111,10 +111,19 @@ namespace ConsoleApp1
 
                         }
                     }*/
+
+                    Console.WriteLine(details.Length);   
+
                     if (details[1] == targetID) // details[1] should be the ID attribute for all users. 
                     {
                         Console.WriteLine("Found correct user with ID: {0}", targetID);
-                        details[details.Length] = updateContent;
+                        details[details.Length - 1] = updateContent;
+
+                        Console.WriteLine("Displaying stuff in details array, after updating stuff");
+                        foreach (string line in contents)
+                        {
+                            Console.WriteLine(line);
+                        }
 
                         string updatedLine = "";
                         for (int a = 0; a < details.Length; a++)
@@ -124,6 +133,13 @@ namespace ConsoleApp1
                         }
 
                         contents[i] = updatedLine;
+
+                        Console.WriteLine("Displaying udpated stuff in contents array");
+                        foreach(string line in contents) 
+                        {
+                            Console.WriteLine(line);
+                        }
+
                         break;
                     }
                 }// end of: for loop
@@ -131,6 +147,15 @@ namespace ConsoleApp1
                 // This should overwrite the updated text back to the original file
                 // It will firstly delete the original file, 
                 // Then create a new file with updated contents, along with original unchanged contents.
+
+                //contents.R
+                List<string> contentsTrimmed = new List<string>();
+                foreach (string line in contents)
+                {
+                    contentsTrimmed.Add(line);
+                }
+                contentsTrimmed.RemoveAll("A");
+
                 File.Delete(path);
                 File.WriteAllLines(path, contents);
 

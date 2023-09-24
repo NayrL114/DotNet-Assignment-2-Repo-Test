@@ -39,6 +39,12 @@ namespace ConsoleApp1
             get ==> ReturnTypeEncoder
         }*/
 
+        public override string ToString()
+        {
+            //return base.ToString();
+            return (this.Name + ", " + this.DoctorID);
+        }
+
         public void MainMenu()
         {
             Console.WriteLine("This would display the main menu for the Doctor");
