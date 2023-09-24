@@ -79,7 +79,7 @@ namespace ConsoleApp1
                         continue;
                     }
                     //Console.WriteLine("Creating Patient {0}", detail[0]);
-                    Patient patient = new Patient(detail[4], detail);
+                    Patient patient = new Patient(detail[4], detail, this);
                     patientList.Add(patient);
                 }
 

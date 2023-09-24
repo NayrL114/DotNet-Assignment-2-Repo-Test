@@ -162,7 +162,37 @@ namespace TestProgram
                 LogInID = Console.ReadLine();
                 Console.Write("\nPassword: ");
                 //String LogInPW = Console.ReadLine();
-                LogInPW = Console.ReadLine();
+                //LogInPW = Console.ReadLine();
+
+                ConsoleKey inputChar;
+                //ConsoleKeyInfo inputKey;
+                string LogInPW = "";
+
+                do
+                //while ((inputKey = Console.ReadKey(true).Key) != ConsoleKey.Enter);
+                {
+                    //ConsoleKeyInfo
+                    ConsoleKeyInfo inputKey = Console.ReadKey(true);
+                    inputChar = inputKey.Key;
+
+                    if (!(inputChar == ConsoleKey.Enter))
+                    {
+                        LogInPW += inputKey.KeyChar;
+                    }
+                    
+                    //Console.Write("\b");
+                    Console.Write("*");
+
+                    //Console.WriteLine(LogInPW);
+                }
+                while (inputChar != ConsoleKey.Enter);
+
+                LogInPW.Remove(LogInPW.Length - 1);
+                //Console.WriteLine(LogInPW);
+
+                //Console.Write("\b");
+
+                //Console.ReadKey(true);
 
                 Console.Write("\n");
 
@@ -283,7 +313,8 @@ namespace TestProgram
                     if (LogInPW == details[2])
                     {
                         // If ID and passwords all matches
-                        Console.WriteLine("Autenticated as Admin {0}", details[0]);
+                        Console.WriteLine("\nAutenticated as Admin {0}. ", details[0]); 
+                        Console.WriteLine("Press any keys to continue");
                         Console.ReadKey();
                         Console.Clear();
                         //name = details[0];
@@ -333,7 +364,8 @@ namespace TestProgram
                     //if (util.GetDoctorByID(doctorDetail). == )
                     {
                         // If ID and passwords all matches
-                        Console.WriteLine("Autenticated as Doctor {0}", details[0]);
+                        Console.WriteLine("\nAutenticated as Doctor {0}.", details[0]);
+                        Console.WriteLine("Press any keys to continue.");
                         Console.ReadKey();
                         Console.Clear();
                         //name = details[0];
@@ -381,7 +413,8 @@ namespace TestProgram
                     if (LogInPW == details[5])
                     {
                         // If ID and passwords all matches
-                        Console.WriteLine("Autenticated as Patient {0}", details[0]);
+                        Console.WriteLine("\nAutenticated as Patient {0}.", details[0]);
+                        Console.WriteLine("Press any keys to continue.");
                         Console.ReadKey();
                         Console.Clear();
                         //name = details[0];
