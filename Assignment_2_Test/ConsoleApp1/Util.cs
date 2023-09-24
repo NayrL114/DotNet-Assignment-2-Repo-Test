@@ -25,6 +25,13 @@ namespace ConsoleApp1
 
         public void InitialiseUserData()
         {
+
+            //if (patientList.Count != 0 && doctorList.Count != 0 && adminList.Count != 0)
+            if (patientList.Count != 0)
+            {
+                return;
+            }
+
             //List<String> adminFileLines = FileManager.ReadStringListFromFile("Admins.txt");
             //List<String> doctorFileLines = FileManager.ReadStringListFromFile("Doctors.txt");
             List<String> patientFileLines = FileManager.ReadStringListFromFile("Patients.txt");
@@ -115,6 +122,24 @@ namespace ConsoleApp1
             }*/
             throw new Exception("Patient not found");
             //return false;
+        }
+
+        public void PrintAllPatients()
+        {
+            if (patientList.Count == 0)
+            {
+                Console.WriteLine("No patient stored in the database. ");
+                //return false;
+            }
+
+            Console.WriteLine("Printing all patient now");
+
+            foreach (Patient patient in patientList)
+            {
+                //Console.WriteLine("Printing a patient");
+                Console.WriteLine(patient.ToString());
+                //if (patient.Patient_ID == ID) { return patient; }
+            }
         }
 
 

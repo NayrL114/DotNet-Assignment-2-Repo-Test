@@ -76,6 +76,12 @@ namespace ConsoleApp1
 
                     switch (MainMenuInput)
                     {
+                        case 3:
+                            Console.WriteLine("Listing all patients");
+                            Console.ReadKey();
+                            Console.Clear();
+                            ListAllPatients();
+                            break;
                         case 4:
                             Console.WriteLine("Checking an existing patient");
                             Console.ReadKey();
@@ -152,10 +158,23 @@ namespace ConsoleApp1
             
         }// end of MainMenu()
 
+        // Input Number 3
+        public void ListAllPatients()
+        {
+            Console.WriteLine("Inside ListAllPatients() function, Press any keys to continue. ");
+            Console.ReadKey();
+
+            util.PrintAllPatients();
+
+            Console.WriteLine("All patients displayed.\nPress any keys to return to menu. ");
+            Console.ReadKey();
+            Console.Clear();
+        }
+
         // Input Number 4
         public void CheckPatientDetails()
         {
-            Console.WriteLine("Inside CheckPatientDetails() function, input details");
+            Console.WriteLine("Inside CheckPatientDetails() function, Press any keys to continue. ");
             Console.ReadKey();
 
             Console.WriteLine("Provide the patient ID you would like to check: ");
