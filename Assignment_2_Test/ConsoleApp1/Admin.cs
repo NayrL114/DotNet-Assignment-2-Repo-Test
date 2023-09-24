@@ -16,6 +16,8 @@ namespace ConsoleApp1
         public int MainMenuInput = 0;
 
         public bool LoggedIn = true;
+
+        private Util util;
         
         public Admin(string admin_ID, string name)// :base(Name)
         {
@@ -27,6 +29,14 @@ namespace ConsoleApp1
         {
             this.Admin_ID = admin_ID;
             this.Name = adminDetails[0];
+        }
+
+        // Constructor for current logged in users. 
+        public Admin(string admin_ID, string[] adminDetails, Util util)
+        {
+            this.Admin_ID = admin_ID;
+            this.Name = adminDetails[0];
+            this.util = util;// Receiving the util object initialised from Program.cs
         }
 
         public void MainMenu()
@@ -146,11 +156,17 @@ namespace ConsoleApp1
                 Console.WriteLine("Input Patient Name: ");
                 inputDetails.Add(Console.ReadLine());
 
-                Console.WriteLine("Input Patient ID: ");
-                inputDetails.Add(Console.ReadLine());
-                //String inputId = Console.ReadLine();
-                /*if (inputId != null && inputId != ""){
-                    if (!Util.CheckPatientExistsByID(inputId))
+                Console.WriteLine("Your unique PatientID is: ");
+                String uniqueID = util.GenerateUniquePatientID();
+                Console.WriteLine(uniqueID);
+                inputDetails.Add(uniqueID);
+
+                /*Console.WriteLine("Input Patient ID: ");
+                //inputDetails.Add(Console.ReadLine());
+                String inputId = Console.ReadLine();
+                if (inputId != null && inputId != "")
+                {
+                    if (!util.CheckPatientExistsByID(inputId))
                     {
                         inputDetails.Add(inputId);
                     }

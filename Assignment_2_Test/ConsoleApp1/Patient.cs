@@ -9,7 +9,7 @@ namespace ConsoleApp1
 {
     internal class Patient: User
     {
-        private string Patient_ID { get; set; }
+        public string Patient_ID { get; set; }
 
         public Patient(string patient_ID, string name)
         {

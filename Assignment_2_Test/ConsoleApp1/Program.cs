@@ -146,7 +146,8 @@ namespace TestProgram
                         //fileTest = FileManager.ReadStringArrayFromFile("test.txt");
 
                         //Admin admin = new Admin(LogInID, LoggedInUserDetails[0]);
-                        Admin admin = new Admin(LogInID, LoggedInUserDetails);
+                        //Admin admin = new Admin(LogInID, LoggedInUserDetails);
+                        Admin admin = new Admin(LogInID, LoggedInUserDetails, util);
                         // CONSIDER UPDATING CONSTRUCTORS TO ACCEPT STRING ARRAY !!!!!!!!!!
                         admin.MainMenu();
 

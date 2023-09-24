@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,7 +9,7 @@ namespace ConsoleApp1
 {
     internal class Doctor: User
     {
-        private string DoctorID {  get; set; }
+        public string DoctorID {  get; set; }
 
         public Doctor(string doctor_ID, string name)// :base(Name)
         {
@@ -21,6 +22,11 @@ namespace ConsoleApp1
             this.DoctorID = doctor_ID;
             this.Name = doctorDetails[0];
         }
+
+        /*public string DoctorID
+        {
+            get ==> ReturnTypeEncoder
+        }*/
 
         public void MainMenu()
         {

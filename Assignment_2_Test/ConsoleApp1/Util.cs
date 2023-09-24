@@ -44,9 +44,25 @@ namespace ConsoleApp1
             patientList = new List<Patient>();
         }
 
-        public static string GeneratePatientID()
+        public string GenerateUniquePatientID()
         {
-            return "114514";
+            //return "114514";
+            bool isDuplicated = false;
+            Random rand = new Random();
+            string patientID = "";
+
+            do
+            {
+                patientID = "";
+                patientID += "0";
+                patientID += "0";
+                patientID += Convert.ToString(rand.Next(100, 999));
+                //Console.WriteLine(patientID);
+                isDuplicated = CheckPatientExistsByID(patientID);
+            }
+            while (isDuplicated);
+
+            return patientID;
             /*string patientID = "";
             patientID += "0";
             patientID += "0";*/
@@ -87,11 +103,11 @@ namespace ConsoleApp1
             throw new Exception("Patient not found");
         }*/
 
-        /*public bool CheckPatientExistsByID(string ID)
+        public bool CheckPatientExistsByID(string ID)
         {
             // Return TRUE if exists, 
             // Return FALSE if not exists
-            if (patientList.Count == 0)
+            if (patientList.Count == 0 || ID == null)
             {
                 //throw new Exception("Patient list is not initialised");
                 return false;
@@ -107,7 +123,7 @@ namespace ConsoleApp1
             }
             //throw new Exception("Patient not found");
             return false;
-        }*/
+        }
 
     }
 }
