@@ -124,8 +124,35 @@ namespace ConsoleApp1
         // Code section related to patient handling
 
         // Generates an unique Patient ID, 
-        // Format is: 00(XXX), where X can be any numbers between 0-9
+        // Format is: 0(XXXX), where X can be any numbers between 0-9
         public string GenerateUniquePatientID()
+        {
+            //return "114514";
+            bool isDuplicated = false;
+            Random rand = new Random();
+            string patientID = "";
+
+            do
+            {
+                patientID = "";
+                patientID += "0";
+                //patientID += "0";
+                patientID += Convert.ToString(rand.Next(1000, 9999));
+                //Console.WriteLine(patientID);
+                isDuplicated = CheckPatientExistsByID(patientID);
+            }
+            while (isDuplicated);
+
+            return patientID;
+            /*string patientID = "";
+            patientID += "0";
+            patientID += "0";*/
+            //patientID += Random.Next(0)
+        }
+
+        // Generates an unique Doctor ID, 
+        // Format is: 00(XXX), where X can be any numbers between 0-9
+        internal string GenerateUniqueDoctorID()
         {
             //return "114514";
             bool isDuplicated = false;
@@ -139,7 +166,7 @@ namespace ConsoleApp1
                 patientID += "0";
                 patientID += Convert.ToString(rand.Next(100, 999));
                 //Console.WriteLine(patientID);
-                isDuplicated = CheckPatientExistsByID(patientID);
+                isDuplicated = CheckDoctorExistsByID(patientID);
             }
             while (isDuplicated);
 
@@ -380,6 +407,8 @@ namespace ConsoleApp1
         }
 
         
+
+
 
 
 
