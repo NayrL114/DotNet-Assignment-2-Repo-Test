@@ -15,8 +15,10 @@ public enum userType
 
 struct Appointment
 {
+    String appointmentID;
     Patient bookedPatient;
     Doctor bookedDoctor;
+    String details;
 }
 
 namespace TestProgram

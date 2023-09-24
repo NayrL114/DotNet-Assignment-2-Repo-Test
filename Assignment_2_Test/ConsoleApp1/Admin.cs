@@ -18,20 +18,21 @@ namespace ConsoleApp1
         public bool LoggedIn = true;
 
         private Util util;
-        
-        public Admin(string admin_ID, string name)// :base(Name)
+
+        /*public Admin(string admin_ID, string name)// :base(Name)
         {
             this.Admin_ID = admin_ID;
             this.Name = name;
-        }
+        }*/
 
+        // Admin Constructor as storing objects
         public Admin(string admin_ID, string[] adminDetails)
         {
             this.Admin_ID = admin_ID;
             this.Name = adminDetails[0];
         }
 
-        // Constructor for current logged in users. 
+        // Admin Constructor for current logged in users. 
         public Admin(string admin_ID, string[] adminDetails, Util util)
         {
             this.Admin_ID = admin_ID;
@@ -41,13 +42,10 @@ namespace ConsoleApp1
 
         public void MainMenu()
         {
-            
-
             do
             {
-
                 //Console.WriteLine("This would display the main menu for the ADMIN");
-                Console.WriteLine("The Admin ID is {0} and the Name is {1}", this.Admin_ID, this.Name);
+                //Console.WriteLine("The Admin ID is {0} and the Name is {1}", this.Admin_ID, this.Name);
 
                 Console.WriteLine("Welcome to DOTNET Hospital Management System, Admin {0}", this.Name);
 
@@ -59,7 +57,7 @@ namespace ConsoleApp1
                 Console.WriteLine("5. Add doctor");
                 Console.WriteLine("6. Add patient");
                 Console.WriteLine("7. Log Out");
-                Console.WriteLine("8. Exit");
+                Console.WriteLine("8. Exit Application");
                 Console.WriteLine("\nYour input for choosing option is: ");
 
                 //MainMenuInput = Convert.ToInt32(Console.ReadLine());
@@ -132,7 +130,7 @@ namespace ConsoleApp1
                 //if () 
                 //if (MainMenuInput.GetTypeCode() != TypeCode.Int32) // checking if input is valid
                 //{
-                
+
 
                 /*if (MainMenuInput == 8)
                     {
@@ -153,16 +151,17 @@ namespace ConsoleApp1
                     Console.ReadKey();
                 }*/
             }
-            while (LoggedIn);           
+            while (LoggedIn);
 
-            
+
         }// end of MainMenu()
 
         // Input Number 3
         public void ListAllPatients()
         {
-            Console.WriteLine("Inside ListAllPatients() function, Press any keys to continue. ");
-            Console.ReadKey();
+            /*Console.WriteLine("Inside ListAllPatients() function, Press any keys to continue. ");
+            Console.ReadKey();*/
+            Console.WriteLine("Below are all patient details recorded in the database: ");
 
             util.PrintAllPatients();
 
@@ -174,10 +173,10 @@ namespace ConsoleApp1
         // Input Number 4
         public void CheckPatientDetails()
         {
-            Console.WriteLine("Inside CheckPatientDetails() function, Press any keys to continue. ");
-            Console.ReadKey();
+            /*Console.WriteLine("Inside CheckPatientDetails() function, Press any keys to continue. ");
+            Console.ReadKey();*/
 
-            Console.WriteLine("Provide the patient ID you would like to check: ");
+            Console.WriteLine("Please provide the patient ID you would like to check: ");
             string patientID = Console.ReadLine();
 
             try
@@ -187,7 +186,7 @@ namespace ConsoleApp1
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.ToString());
+                //Console.WriteLine(e.ToString());
             }
 
             Console.WriteLine("Patient details printed out. \nPress any keys to return to menu");
@@ -306,7 +305,7 @@ namespace ConsoleApp1
 
             foreach (string detail in inputDetails)
             {
-                Console.WriteLine("{0}", detail);
+                //Console.WriteLine("{0}", detail);
                 finalAdding += detail;
                 finalAdding += ",";
             }
@@ -316,16 +315,16 @@ namespace ConsoleApp1
             finalAdding.Remove(finalAdding.Length - 1);
             finalAdding.Remove(finalAdding.Length - 1);*/
 
-            Console.WriteLine(finalAdding); 
+            //Console.WriteLine(finalAdding); 
 
-            Console.ReadKey();
+            //Console.ReadKey();
 
             FileManager.AppendToFileEnd("Patients.txt", finalAdding);
 
             Console.Clear();
 
-        }
+        }// end of: AddPatient()        
 
+    }// end of: internal class Admin: User
 
-    }// end of internal class Admin: User
-}
+}// end of the world

@@ -11,16 +11,27 @@ namespace ConsoleApp1
     {
         public string DoctorID {  get; set; }
 
-        public Doctor(string doctor_ID, string name)// :base(Name)
+        private Util util;
+
+        /*public Doctor(string doctor_ID, string name)// :base(Name)
         {
             this.DoctorID = doctor_ID;
             this.Name = name;
-        }
+        }*/
 
+        // Doctor Constructor as storing objects
         public Doctor(string doctor_ID, string[] doctorDetails)// :base(Name)
         {
             this.DoctorID = doctor_ID;
             this.Name = doctorDetails[0];
+        }
+
+        // Doctor Constructor as currently logged in user
+        public Doctor(string doctor_ID, string[] doctorDetails, Util util)// :base(Name)
+        {
+            this.DoctorID = doctor_ID;
+            this.Name = doctorDetails[0];
+            this.util = util;
         }
 
         /*public string DoctorID

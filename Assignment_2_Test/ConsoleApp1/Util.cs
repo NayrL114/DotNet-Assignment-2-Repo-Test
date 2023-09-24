@@ -21,20 +21,37 @@ namespace ConsoleApp1
         //private String[] recordedAppointments;
         public List<String> bookedAppointments;*/
 
+        public List<Appointment> bookedAppointments = new List<Appointment>();
+
         // ALL FUNCTION WAS STATIC IN PREVIOUS UTIL CLASS DESIGN
 
+        // Populates all three user lists
         public void InitialiseUserData()
         {
-
-            //if (patientList.Count != 0 && doctorList.Count != 0 && adminList.Count != 0)
-            if (patientList.Count != 0)
+            // If there are already contents inside lists, don't do anything
+            if (patientList.Count != 0 && doctorList.Count != 0 && adminList.Count != 0)
+            //if (patientList.Count != 0)
             {
                 return;
             }
 
-            //List<String> adminFileLines = FileManager.ReadStringListFromFile("Admins.txt");
-            //List<String> doctorFileLines = FileManager.ReadStringListFromFile("Doctors.txt");
+            List<String> adminFileLines = FileManager.ReadStringListFromFile("Admins.txt");
+            List<String> doctorFileLines = FileManager.ReadStringListFromFile("Doctors.txt");
             List<String> patientFileLines = FileManager.ReadStringListFromFile("Patients.txt");
+
+            foreach (String details in adminFileLines)
+            {
+                string[] detail = details.Split(',');
+                Admin admin = new Admin(detail[1], detail);
+                adminList.Add(admin);
+            }
+
+            foreach (String details in doctorFileLines)
+            {
+                string[] detail = details.Split(',');
+                Doctor doctor = new Doctor(detail[1], detail);
+                doctorList.Add(doctor);
+            }
 
             foreach (String details in patientFileLines)
             {
@@ -44,14 +61,20 @@ namespace ConsoleApp1
             }
         }
 
+        // Empties all three user lists.
         public void WipeUserData()
         {
             adminList = new List<Admin>();
             doctorList = new List<Doctor>();
             patientList = new List<Patient>();
+
+            bookedAppointments = new List<Appointment>();
         }
 
         // Code section related to patient handling
+
+        // Generates an unique Patient ID, 
+        // Format is: 00(XXX), where X can be any numbers between 0-9
         public string GenerateUniquePatientID()
         {
             //return "114514";
@@ -77,10 +100,11 @@ namespace ConsoleApp1
             //patientID += Random.Next(0)
         }
 
+        // Checking if a patient with passed in ID already exists. 
+        // Return TRUE if exists, 
+        // Return FALSE if not exists
         public bool CheckPatientExistsByID(string ID)
         {
-            // Return TRUE if exists, 
-            // Return FALSE if not exists
             if (patientList.Count == 0 || ID == null)
             {
                 //throw new Exception("Patient list is not initialised");
@@ -99,6 +123,7 @@ namespace ConsoleApp1
             return false;
         }
 
+        // Get a patient object stored in the patientList by passed in ID
         public Patient GetPatientByID(string ID) {
             if (patientList.Count == 0 || ID == null)
             {
@@ -124,6 +149,7 @@ namespace ConsoleApp1
             //return false;
         }
 
+        // Print all patients.ToString() on to screen
         public void PrintAllPatients()
         {
             if (patientList.Count == 0)
