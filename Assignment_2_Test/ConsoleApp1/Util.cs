@@ -314,8 +314,12 @@ namespace ConsoleApp1
                         //return patientList[i];
                         //return true;
                         isDuplicated = true;
+                        break;
                     }
+                    isDuplicated = false;
                 }
+
+                
                 //throw new Exception("Patient not found");
                 //return false;
             }

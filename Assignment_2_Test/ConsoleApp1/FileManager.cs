@@ -96,7 +96,7 @@ namespace ConsoleApp1
                 string fullContents = File.ReadAllText(path);
 
                 //List<string> contents = fullContents.Split('\n');
-                string[] contents = fullContents.Split('\n');
+                string[] contents = fullContents.Split("\r\n");
                 // Breaking down full file content into line by line content details with comma,
 
                 for (int i = 0; i < contents.Length; i++)
@@ -112,18 +112,18 @@ namespace ConsoleApp1
                         }
                     }*/
 
-                    Console.WriteLine(details.Length);   
+                    //Console.WriteLine(details.Length);   
 
                     if (details[1] == targetID) // details[1] should be the ID attribute for all users. 
                     {
                         Console.WriteLine("Found correct user with ID: {0}", targetID);
                         details[details.Length - 1] = updateContent;
 
-                        Console.WriteLine("Displaying stuff in details array, after updating stuff");
+                        /*Console.WriteLine("Displaying stuff in details array, after updating stuff");
                         foreach (string line in contents)
                         {
                             Console.WriteLine(line);
-                        }
+                        }*/
 
                         string updatedLine = "";
                         for (int a = 0; a < details.Length; a++)
@@ -134,11 +134,11 @@ namespace ConsoleApp1
 
                         contents[i] = updatedLine;
 
-                        Console.WriteLine("Displaying udpated stuff in contents array");
+                        /*Console.WriteLine("Displaying updated stuff in contents array");
                         foreach(string line in contents) 
                         {
                             Console.WriteLine(line);
-                        }
+                        }*/
 
                         break;
                     }
@@ -149,15 +149,31 @@ namespace ConsoleApp1
                 // Then create a new file with updated contents, along with original unchanged contents.
 
                 //contents.R
-                List<string> contentsTrimmed = new List<string>();
+                /*List<string> contentsTrimmed = new List<string>();
                 foreach (string line in contents)
                 {
                     contentsTrimmed.Add(line);
                 }
-                contentsTrimmed.RemoveAll("A");
+                contentsTrimmed.RemoveAll("\r");*/
+                //contentsTrimmed.R
 
                 File.Delete(path);
-                File.WriteAllLines(path, contents);
+
+                /*foreach (string line in contents)
+                {
+                    File.AppendAllText(path, line);
+                }*/
+
+                for (int i = 0; i <= contents.Length; i++)
+                {                    
+                    if (i != contents.Length - 1)
+                    {
+                        contents[i] += "\n";
+                    }
+                    File.AppendAllText(path, contents[i]);
+                }
+                //contents.Remove(contents.Length);   
+                //File.WriteAllLines(path, contents);
 
             }
             catch (FileNotFoundException e)
