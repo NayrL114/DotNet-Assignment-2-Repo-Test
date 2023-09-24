@@ -23,42 +23,67 @@ namespace ConsoleApp1
 
         public List<Appointment> bookedAppointments = new List<Appointment>();
 
+        public string latestBookingID;
+
         // ALL FUNCTION WAS STATIC IN PREVIOUS UTIL CLASS DESIGN
 
         // Populates all three user lists
         public void InitialiseUserData()
         {
             // If there are already contents inside lists, don't do anything
-            if (patientList.Count != 0 && doctorList.Count != 0 && adminList.Count != 0)
             //if (patientList.Count != 0)
+            if (patientList.Count != 0 
+                && doctorList.Count != 0 
+                && adminList.Count != 0 
+                && bookedAppointments.Count != 0)
             {
                 return;
             }
 
-            List<String> adminFileLines = FileManager.ReadStringListFromFile("Admins.txt");
-            List<String> doctorFileLines = FileManager.ReadStringListFromFile("Doctors.txt");
-            List<String> patientFileLines = FileManager.ReadStringListFromFile("Patients.txt");
-
-            foreach (String details in adminFileLines)
+            try
             {
-                string[] detail = details.Split(',');
-                Admin admin = new Admin(detail[1], detail);
-                adminList.Add(admin);
-            }
+                List<string> adminFileLines = FileManager.ReadStringListFromFile("Admins.txt");
+                List<string> doctorFileLines = FileManager.ReadStringListFromFile("Doctors.txt");
+                List<string> patientFileLines = FileManager.ReadStringListFromFile("Patients.txt");
 
-            foreach (String details in doctorFileLines)
-            {
-                string[] detail = details.Split(',');
-                Doctor doctor = new Doctor(detail[1], detail);
-                doctorList.Add(doctor);
-            }
+                //List<string> appointmentFileLines = FileManager.ReadStringListFromFile("Appointments.txt");
 
-            foreach (String details in patientFileLines)
-            {
-                string[] detail = details.Split(',');
-                Patient patient = new Patient(detail[1], detail);
-                patientList.Add(patient);
+                foreach (string details in adminFileLines)
+                {
+                    string[] detail = details.Split(',');
+                    Admin admin = new Admin(detail[1], detail);
+                    adminList.Add(admin);
+                }
+
+                foreach (string details in doctorFileLines)
+                {
+                    string[] detail = details.Split(',');
+                    Doctor doctor = new Doctor(detail[1], detail);
+                    doctorList.Add(doctor);
+                }
+
+                foreach (string details in patientFileLines)
+                {
+                    string[] detail = details.Split(',');
+                    Patient patient = new Patient(detail[1], detail);
+                    patientList.Add(patient);
+                }
+
+                /*foreach (string details in appointmentFileLines)
+                {
+                    string[] detail = details.Split(',');
+                    Appointment appointment = new Appointment(detail[1], detail);
+                    bookedAppointments.Add(appointment);
+                }*/
             }
+            catch (FileNotFoundException e)
+            {
+                Console.WriteLine(e.ToString());
+                //onsole.WriteLine("File not found");
+            }
+            
+
+            
         }
 
         // Empties all three user lists.
@@ -167,6 +192,136 @@ namespace ConsoleApp1
                 //if (patient.Patient_ID == ID) { return patient; }
             }
         }
+
+        // Get a doctor object stored in the doctorList by passed in ID
+        public Doctor GetDoctorByID(string ID)
+        {
+            if (doctorList.Count == 0 || ID == null)
+            {
+                throw new Exception("Doctor list is not initialised");
+                //return false;
+            }
+
+            foreach (Doctor doctor in doctorList)
+            {
+                //Console.WriteLine(patient.Patient_ID);
+                if (doctor.DoctorID == ID) { return doctor; }
+            }
+            
+            throw new Exception("Doctor not found");
+            //return false;
+        }
+
+        // Print all doctor.ToString() on to screen
+        public void PrintAllDoctors()
+        {
+            if (doctorList.Count == 0)
+            {
+                Console.WriteLine("No doctor stored in the database. ");
+                //return false;
+            }
+
+            Console.WriteLine("Printing all doctor now");
+
+            foreach (Doctor doctor in doctorList)
+            {
+                //Console.WriteLine("Printing a patient");
+                Console.WriteLine(doctor.ToString());
+                //if (patient.Patient_ID == ID) { return patient; }
+            }
+        }
+
+        public bool CheckDoctorExistsByID(string ID)
+        {
+            if (doctorList.Count == 0 || ID == null)
+            {
+                //throw new Exception("Patient list is not initialised");
+                return false;
+            }
+
+            for (int i = 0; i < doctorList.Count; i++)
+            {
+                if (doctorList[i].DoctorID == ID)
+                {
+                    //return patientList[i];
+                    return true;
+                }
+            }
+            //throw new Exception("Patient not found");
+            return false;
+        }
+
+        // Adding a new Appointment
+        // A new Appointment struct is created and added to the Appointment.txt file
+
+        //public void AddAppointment(string appointment)
+        public void AddAppointment(List<string> appointmentDetail)
+        {
+            bool isDuplicated = true;
+            Random rand = new Random();
+            string bookingID = "";
+
+            do
+            {
+                /*bookingID = "";
+                bookingID += "0";
+                bookingID += "0";*/
+                //for (int i = 0; i < 5; i++) // Length for bookingID is determined to be 5 for now
+                bookingID = "";
+                bookingID += Convert.ToString(rand.Next(0, 99999));
+                //Console.WriteLine(patientID);
+                //isDuplicated = CheckPatientExistsByID(patientID);
+
+                if (bookedAppointments.Count == 0)
+                {
+                    //throw new Exception("Patient list is not initialised");
+                    //return false;
+                    isDuplicated = false;
+                }
+
+                for (int i = 0; i < bookedAppointments.Count; i++)
+                {
+                    if (bookedAppointments[i].appointmentID == bookingID)
+                    {
+                        //return patientList[i];
+                        //return true;
+                        isDuplicated = true;
+                    }
+                }
+                //throw new Exception("Patient not found");
+                //return false;
+            }
+            while (isDuplicated);
+
+            /*Appointment booking = new Appointment(bookingID, 
+                GetPatientByID(appointmentDetail[0]), 
+                GetDoctorByID(appointmentDetail[1]), 
+                appointmentDetail[2]);*/
+
+            string finalAdding = "\n";
+            finalAdding += bookingID;
+            finalAdding += ",";
+
+            foreach (string detail in appointmentDetail)
+            {
+                //Console.WriteLine("{0}", detail);
+                finalAdding += detail;
+                finalAdding += ",";
+            }
+
+            
+
+            FileManager.AppendToFileEnd("Appointments.txt", finalAdding);
+
+            //return patientID;
+            /*string patientID = "";
+            patientID += "0";
+            patientID += "0";*/
+            //patientID += Random.Next(0)
+        }
+
+        
+
 
 
         /*public Doctor GetDoctorByID(string ID)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -15,6 +16,9 @@ namespace ConsoleApp1
         public int MainMenuInput = 0;
 
         public bool LoggedIn = true;
+
+        //private Doctor assignedDoctorID;
+        private string assignedDoctorID;
 
         private Util util;
 
@@ -37,6 +41,13 @@ namespace ConsoleApp1
             this.Patient_ID = patient_ID;
             this.Name = patientDetails[0];
             this.util = util;
+
+            this.assignedDoctorID = patientDetails[2];
+
+            /*if (patientDetails[2] != null || patientDetails[2] != "")
+            {
+                assignedDoctorID = util.GetDoctorByID(patientDetails[2]);
+            }*/
         }
 
         public override string ToString()
@@ -141,13 +152,51 @@ namespace ConsoleApp1
             Console.WriteLine("Now inside BookAppointment()");
             Console.ReadKey();
 
+            List<string> appointmentInfo = new List<string>();
+
+            appointmentInfo.Add(Patient_ID);
+
+            //if (assignedDoctorID == null || assignedDoctorID.DoctorID == "")
+            if (assignedDoctorID == null || assignedDoctorID == "")
+            {
+                Console.WriteLine("No doctor is assigned." +
+                    "\nChoose a doctor from below by typing the corresponding doctor ID: ");
+                util.PrintAllDoctors();
+                string inputID;
+
+                // Making sure that user is entering a valid doctor ID
+                do
+                {
+                    inputID = Console.ReadLine();
+                }
+                while (!util.CheckDoctorExistsByID(inputID));
+                // While there is not a valid doctor existing with this ID
+
+                //string inputID = Console.ReadLine();
+                /*if (util.CheckDoctorExistsByID(inputID))// Means there is a valid doctor existing with this ID
+                {
+                    //inputID = Console.ReadLine();
+                    appointmentInfo.Add(inputID);
+                }*/
+
+                assignedDoctorID = inputID;
+            }
+
+            appointmentInfo.Add(assignedDoctorID);
+
             Console.WriteLine("You are booking a new appointment with (Your Doctor's Name Here)");
             Console.WriteLine("Description of the appointment: ");
             string appointmentDetails = Console.ReadLine();
             Console.WriteLine(appointmentDetails);
+            appointmentInfo.Add(appointmentDetails);
+
+            util.AddAppointment(appointmentInfo);
+
+            FileManager.AppendAtTheEndOfLine("Patient.txt", Patient_ID, assignedDoctorID);
 
             Console.WriteLine("The appointment has been booked successfully.\nPress any keys to return to menu");
             Console.ReadKey();
+            Console.Clear();
         }
 
         private void ListPatientDetails()

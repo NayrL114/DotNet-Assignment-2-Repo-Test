@@ -200,7 +200,7 @@ namespace ConsoleApp1
             /*Console.WriteLine("Inside AddPatient() function, input details");
             Console.ReadKey();*/
 
-            List<String> inputDetails = new List<String>();
+            List<string> inputDetails = new List<string>();
 
             bool comfirmAdding = false;
             bool finishedAdding = false;
@@ -211,7 +211,7 @@ namespace ConsoleApp1
                 inputDetails.Add(Console.ReadLine());
 
                 Console.WriteLine("Your unique PatientID is: ");
-                String uniqueID = util.GenerateUniquePatientID();
+                string uniqueID = util.GenerateUniquePatientID();
                 Console.WriteLine(uniqueID);
                 inputDetails.Add(uniqueID);
 
@@ -239,7 +239,7 @@ namespace ConsoleApp1
                 do
                 {
                     Console.WriteLine("Comfirm Adding? Y/N");
-                    String input = Console.ReadLine();
+                    string input = Console.ReadLine();
                     if (input == null || input == "")
                     {
                         Console.WriteLine("Invalid Input, press any keys to try again.");
@@ -252,7 +252,7 @@ namespace ConsoleApp1
                         do
                         {
                             Console.WriteLine("Do you want to input details again? Y/N");
-                            String inputTwo = Console.ReadLine();
+                            string inputTwo = Console.ReadLine();
                             if (inputTwo == null || inputTwo == "")
                             {
                                 Console.WriteLine("Invalid Input, press any keys to try again.");
@@ -301,7 +301,7 @@ namespace ConsoleApp1
 
             // Creating the string line for appending into the file
             //Console.WriteLine("Added patients to database.\nPress any keys to continue.");
-            String finalAdding = "\n";
+            string finalAdding = "\n";
 
             foreach (string detail in inputDetails)
             {

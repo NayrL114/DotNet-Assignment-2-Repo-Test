@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace ConsoleApp1
 {
@@ -20,13 +21,13 @@ namespace ConsoleApp1
         }
 
         //public static String[] ReadStringArrayFromFile(string path)
-        public static List<String> ReadStringListFromFile(string path)
+        public static List<string> ReadStringListFromFile(string path)
         {
             //return new string[0];
             try
             {
                 //string[] lines;
-                List<String> lines = new List<String>(); 
+                List<string> lines = new List<string>(); 
 
                 StreamReader fileContent = new StreamReader(path);
                 //fileContent.
@@ -66,11 +67,79 @@ namespace ConsoleApp1
                 // Write the code to Read a key from user   
                 Console.ReadKey();
                 //return new string[0];
-                return new List<String>();
+                return new List<string>();
             }
             //return new string[0];
             //return new List<String>();
         }// end of: ReadStringListFromFile
+
+        public static void AppendAtTheEndOfLine(string path, string targetID, string updateContent)
+        {
+            //File.Move(path, path, )
+            //File.Replace
+
+            try
+            {
+                /*//StreamWriter fileContent = new StreamWriter(path);
+                FileStream fileContent = new FileStream(path, FileMode.Open, FileAccess.ReadWrite);
+                //StreamReader fileReading = new StreamReader(path);
+
+                for (int i = 0; i < fileContent.Length; i++)
+                {
+                    //string content = fileReading.ReadLine;
+                    //while (fileContent.R != "\n") ;
+
+                }
+
+                //fileContent.Write(updateContent);*/
+
+                string fullContents = File.ReadAllText(path);
+
+                //List<string> contents = fullContents.Split('\n');
+                string[] contents = fullContents.Split('\n');
+                // Breaking down full file content into line by line content details with comma,
+
+                for (int i = 0; i < contents.Length; i++)
+                {
+                    //List<string> details = contents[i].Split(",");
+                    string[] details = contents[i].Split(",");
+                    // Breaking down full file content into user attributes seperated by comma,
+                    /*for (int i = 0; i < details.Length; i++)
+                    {
+                        if (details[1] == targetID)
+                        {
+
+                        }
+                    }*/
+                    if (details[1] == targetID) // details[1] should be the ID attribute for all users. 
+                    {
+                        Console.WriteLine("Found correct user with ID: {0}", targetID);
+                        details[details.Length] = updateContent;
+
+                        string updatedLine = "";
+                        for (int a = 0; a < details.Length; a++)
+                        {
+                            updatedLine += details[a];
+                            updatedLine += ",";
+                        }
+
+                        contents[i] = updatedLine;
+                        break;
+                    }
+                }// end of: for loop
+
+                // This should overwrite the updated text back to the original file
+                // It will firstly delete the original file, 
+                // Then create a new file with updated contents, along with original unchanged contents.
+                File.Delete(path);
+                File.WriteAllLines(path, contents);
+
+            }
+            catch (FileNotFoundException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
 
         //public static void AppendToFileEnd(string path, List<String> inputDetails)
         public static void AppendToFileEnd(string path, string inputDetails)
@@ -81,12 +150,14 @@ namespace ConsoleApp1
 
             File.AppendAllText(path, inputDetails);
 
+            
+
+            /*File.WriteAllText();*/
+
             //try
             //{
 
             // ADD NEW PATIENT TO THE END OF THE FILE LINE
-
-
 
             //string[] lines;
             //List<String> lines = new List<String>();

@@ -13,12 +13,28 @@ public enum userType
     LoggedOut
 }
 
-struct Appointment
+/*struct Appointment
 {
-    String appointmentID;
+    string appointmentID;
     Patient bookedPatient;
     Doctor bookedDoctor;
-    String details;
+    string details;
+}*/
+
+struct Appointment
+{
+    public string appointmentID;
+    public Patient bookedPatient;
+    public Doctor bookedDoctor;
+    public string details;
+
+    public Appointment(string ID, Patient patient, Doctor doctor, string detail)
+    {
+        appointmentID = ID;
+        bookedPatient = patient;   
+        bookedDoctor = doctor;
+        details = detail;
+    }
 }
 
 namespace TestProgram
@@ -73,17 +89,17 @@ namespace TestProgram
         public string LogInPW = "";
 
         //private String[] adminFilelines;
-        private List<String> adminFileLines;
+        private List<string> adminFileLines;
         //private String[] doctorFilelines;
-        private List<String> doctorFileLines;
+        private List<string> doctorFileLines;
         //private String[] patientFilelines;
-        private List<String> patientFileLines;
+        private List<string> patientFileLines;
         //private String[] recordedAppointments;
-        private List<String> bookedAppointments;
+        private List<string> bookedAppointments;
 
         //private List<Admin> adminList;
 
-        private String[] LoggedInUserDetails;
+        private string[] LoggedInUserDetails;
 
         /*private String correctAdminID = "00001";
         private String correctAdminPW = "12345678";
@@ -200,9 +216,9 @@ namespace TestProgram
                 // so if admin created a new doctor/patient, 
                 // and logged out for logging in as the new doctor/patient, 
                 // the new login detail lists will get updated with new file reading at the beginning of do.
-                adminFileLines = new List<String>();
-                doctorFileLines = new List<String>();
-                patientFileLines = new List<String>();
+                adminFileLines = new List<string>();
+                doctorFileLines = new List<string>();
+                patientFileLines = new List<string>();
 
                 util.WipeUserData();
             }
@@ -211,7 +227,7 @@ namespace TestProgram
 
         }
 
-        public void TestLogInCredentials(String LogInID, String LogInPW)
+        public void TestLogInCredentials(string LogInID, string LogInPW)
         {
 
             //adminFilelines = FileManager.ReadStringArrayFromFile("Admins.txt");
@@ -233,7 +249,7 @@ namespace TestProgram
                 //Console.WriteLine($"{adminDetail}");
                 //Console.WriteLine("{0}", adminDetail);
 
-                String[] details = adminDetail.Split(',');
+                string[] details = adminDetail.Split(',');
 
                 if (LogInID == details[1])
                 {
@@ -319,7 +335,7 @@ namespace TestProgram
                 //Console.WriteLine($"{adminDetail}");
                 //Console.WriteLine("{0}", adminDetail);
 
-                String[] details = doctorDetail.Split(',');
+                string[] details = doctorDetail.Split(',');
 
                 if (LogInID == details[1])
                 {
@@ -362,7 +378,7 @@ namespace TestProgram
                 //Console.WriteLine($"{adminDetail}");
                 //Console.WriteLine("{0}", adminDetail);
 
-                String[] details = patientDetail.Split(',');
+                string[] details = patientDetail.Split(',');
 
                 if (LogInID == details[1])
                 {
