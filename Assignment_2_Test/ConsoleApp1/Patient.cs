@@ -102,37 +102,37 @@ namespace ConsoleApp1
                     switch (MainMenuInput)
                     {
                         case 1:
-                            Console.WriteLine("Displaying my details");
-                            Console.ReadKey();
+                            /*Console.WriteLine("Displaying my details");
+                            Console.ReadKey();*/
                             Console.Clear();
                             ListPatientDetails();
                             break;
                         case 2:
-                            Console.WriteLine("Displaying my doctor's details");
-                            Console.ReadKey();
+                            /*Console.WriteLine("Displaying my doctor's details");
+                            Console.ReadKey();*/
                             Console.Clear();
                             ListDoctorDetails();
                             break;
                         case 3:                            
-                            Console.WriteLine("Listing all appointments");
-                            Console.ReadKey();
+                            /*Console.WriteLine("Listing all appointments");
+                            Console.ReadKey();*/
                             Console.Clear();
                             ListAllAppointments();
                             break;
                         case 4:
-                            Console.WriteLine("Booking an appointment");
-                            Console.ReadKey();
+                            /*Console.WriteLine("Booking an appointment");
+                            Console.ReadKey();*/
                             Console.Clear();
                             BookAppointment();
                             break;
                         case 5:
-                            Console.WriteLine("\nLogging out, Thank you!\nPress any keys to continue");
+                            Console.WriteLine("\nLogging out, Thank you!\nPress any keys to continue.");
                             Console.ReadKey();
                             Console.Clear();
                             LoggedIn = !LoggedIn; // Logging out of admin user and stop admin menu displaying. 
                             return;
                         case 6:
-                            Console.WriteLine("\nExiting application, Thank you!\nPress any keys to continue");
+                            Console.WriteLine("\nExiting application, Thank you!\nPress any keys to continue.");
                             Console.ReadKey();
 
                             Environment.Exit(0);
@@ -142,7 +142,7 @@ namespace ConsoleApp1
                             return;
                         //break;
                         default:
-                            Console.WriteLine("\nIncorrect number Input. \nPress any keys to retry");
+                            Console.WriteLine("\nIncorrect number Input. \nPress any keys to retry.");
                             Console.ReadKey();
                             Console.Clear();
                             break;
@@ -152,7 +152,7 @@ namespace ConsoleApp1
                 }
                 catch (FormatException e)
                 {
-                    Console.WriteLine("\nInvalid Input format. \nPress any keys to retry");
+                    Console.WriteLine("\nInvalid Input format. \nPress any keys to retry.");
                     Console.ReadKey();
                     Console.Clear();
                 }// end of: try block
@@ -224,7 +224,7 @@ namespace ConsoleApp1
         private void ListAllAppointments()
         {
             Console.WriteLine("Appointments for {0}: ", this.Name);
-            Console.ReadKey();
+            //Console.ReadKey();
 
             foreach (string appointmentID in appointmentIDs)
             {
@@ -240,7 +240,7 @@ namespace ConsoleApp1
 
         private void ListDoctorDetails()
         {
-            Console.WriteLine("Your doctor \n");
+            Console.WriteLine("Your doctor: \n");
             Console.WriteLine(util.GetDoctorByID(assignedDoctorID).ToString());
             Console.WriteLine("\nPress any keys to return to menu");
             Console.ReadKey();

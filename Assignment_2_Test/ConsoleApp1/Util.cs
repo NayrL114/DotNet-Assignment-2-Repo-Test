@@ -343,6 +343,8 @@ namespace ConsoleApp1
 
             FileManager.AppendAtTheEndOfLine("Patients.txt", appointmentDetail[0], bookingID);
 
+            FileManager.AppendAtTheEndOfLine("Doctors.txt", appointmentDetail[1], bookingID);
+
             FileManager.AppendToFileEnd("Appointments.txt", finalAdding);
 
             //return patientID;

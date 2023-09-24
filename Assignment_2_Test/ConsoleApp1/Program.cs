@@ -188,7 +188,8 @@ namespace TestProgram
                         Console.ReadKey();*/
 
                         //Doctor doctor = new Doctor(LogInID, LoggedInUserDetails[0]);
-                        Doctor doctor = new Doctor(LogInID, LoggedInUserDetails);
+                        /*Doctor doctor = new Doctor(LogInID, LoggedInUserDetails);*/
+                        Doctor doctor = new Doctor(LogInID, LoggedInUserDetails, util);
                         doctor.MainMenu();
 
                         // Below code executes when user chose log out from admin menu
