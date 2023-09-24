@@ -68,14 +68,23 @@ namespace ConsoleApp1
                 //MainMenuInput = Convert.ToInt32(Console.ReadLine());
                 try
                 {
+
+                    util.InitialiseUserData();
+
                     MainMenuInput = Convert.ToInt32(MainMenuInputString);
                     //Console.WriteLine("MainMenuInput is {0}", MainMenuInput);
 
                     switch (MainMenuInput)
                     {
-                        case 6:
-                            Console.WriteLine("Adding a new patient");
+                        case 4:
+                            Console.WriteLine("Checking an existing patient");
                             Console.ReadKey();
+                            Console.Clear();
+                            CheckPatientDetails();
+                            break;
+                        case 6:
+                            /*Console.WriteLine("Adding a new patient");
+                            Console.ReadKey();*/
                             Console.Clear();
                             AddPatient();
                             break;
@@ -101,6 +110,8 @@ namespace ConsoleApp1
                             Console.Clear();
                             break;
                     }
+
+                    util.WipeUserData();
                 }
                 catch (FormatException e)
                 {
@@ -141,10 +152,35 @@ namespace ConsoleApp1
             
         }// end of MainMenu()
 
+        // Input Number 4
+        public void CheckPatientDetails()
+        {
+            Console.WriteLine("Inside CheckPatientDetails() function, input details");
+            Console.ReadKey();
+
+            Console.WriteLine("Provide the patient ID you would like to check: ");
+            string patientID = Console.ReadLine();
+
+            try
+            {
+                Patient target = util.GetPatientByID(patientID);
+                Console.WriteLine(target.ToString());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            Console.WriteLine("Patient details printed out. \nPress any keys to return to menu");
+            Console.ReadKey();
+            Console.Clear();
+        }
+
+        // Input Number 6
         public void AddPatient()
         {
-            Console.WriteLine("Inside AddPatient() function, input details");
-            Console.ReadKey();
+            /*Console.WriteLine("Inside AddPatient() function, input details");
+            Console.ReadKey();*/
 
             List<String> inputDetails = new List<String>();
 
@@ -265,7 +301,7 @@ namespace ConsoleApp1
 
             Console.ReadKey();
 
-            //FileManager.AppendToFileEnd("Patients.txt", finalAdding);
+            FileManager.AppendToFileEnd("Patients.txt", finalAdding);
 
             Console.Clear();
 

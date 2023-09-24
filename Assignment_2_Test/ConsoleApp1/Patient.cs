@@ -11,16 +11,22 @@ namespace ConsoleApp1
     {
         public string Patient_ID { get; set; }
 
-        public Patient(string patient_ID, string name)
+        /*public Patient(string patient_ID, string name)
         {
             this.Patient_ID = patient_ID;
             this.Name = name;
-        }
+        }*/
 
         public Patient(string patient_ID, string[] patientDetails)
         {
             this.Patient_ID = patient_ID;
             this.Name = patientDetails[0];
+        }
+
+        public override string ToString()
+        {
+            //return base.ToString();
+            return (this.Name + ", " + this.Patient_ID);
         }
 
         public void MainMenu()

@@ -32,7 +32,7 @@ namespace ConsoleApp1
             foreach (String details in patientFileLines)
             {
                 string[] detail = details.Split(',');
-                Patient patient = new Patient(detail[2], detail);
+                Patient patient = new Patient(detail[1], detail);
                 patientList.Add(patient);
             }
         }
@@ -44,6 +44,7 @@ namespace ConsoleApp1
             patientList = new List<Patient>();
         }
 
+        // Code section related to patient handling
         public string GenerateUniquePatientID()
         {
             //return "114514";
@@ -68,6 +69,54 @@ namespace ConsoleApp1
             patientID += "0";*/
             //patientID += Random.Next(0)
         }
+
+        public bool CheckPatientExistsByID(string ID)
+        {
+            // Return TRUE if exists, 
+            // Return FALSE if not exists
+            if (patientList.Count == 0 || ID == null)
+            {
+                //throw new Exception("Patient list is not initialised");
+                return false;
+            }
+
+            for (int i = 0; i < patientList.Count; i++)
+            {
+                if (patientList[i].Patient_ID == ID)
+                {
+                    //return patientList[i];
+                    return true;
+                }
+            }
+            //throw new Exception("Patient not found");
+            return false;
+        }
+
+        public Patient GetPatientByID(string ID) {
+            if (patientList.Count == 0 || ID == null)
+            {
+                throw new Exception("Patient list is not initialised");
+                //return false;
+            }
+
+            foreach(Patient patient in patientList)
+            {
+                //Console.WriteLine(patient.Patient_ID);
+                if (patient.Patient_ID == ID) { return patient; }
+            }
+
+            /*for (int i = 0; i < patientList.Count; i++)
+            {
+                if (patientList[i].Patient_ID == ID)
+                {
+                    return patientList[i];
+                    //return true;
+                }
+            }*/
+            throw new Exception("Patient not found");
+            //return false;
+        }
+
 
         /*public Doctor GetDoctorByID(string ID)
         {
@@ -102,28 +151,6 @@ namespace ConsoleApp1
             }
             throw new Exception("Patient not found");
         }*/
-
-        public bool CheckPatientExistsByID(string ID)
-        {
-            // Return TRUE if exists, 
-            // Return FALSE if not exists
-            if (patientList.Count == 0 || ID == null)
-            {
-                //throw new Exception("Patient list is not initialised");
-                return false;
-            }
-
-            for (int i = 0; i < patientList.Count; i++)
-            {
-                if (patientList[i].Patient_ID == ID)
-                {
-                    //return patientList[i];
-                    return true;
-                }
-            }
-            //throw new Exception("Patient not found");
-            return false;
-        }
 
     }
 }
