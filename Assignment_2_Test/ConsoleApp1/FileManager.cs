@@ -116,7 +116,7 @@ namespace ConsoleApp1
 
                     if (details[1] == targetID) // details[1] should be the ID attribute for all users. 
                     {
-                        Console.WriteLine("Found correct user with ID: {0}", targetID);
+                        //Console.WriteLine("Found correct user with ID: {0}", targetID);
                         details[details.Length - 1] = updateContent;
 
                         /*Console.WriteLine("Displaying stuff in details array, after updating stuff");

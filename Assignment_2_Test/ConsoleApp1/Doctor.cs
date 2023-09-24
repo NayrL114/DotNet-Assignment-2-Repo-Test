@@ -88,7 +88,7 @@ namespace ConsoleApp1
                 Console.WriteLine("4. Check particular patient");
                 Console.WriteLine("5. List appointments with patient");
                 Console.WriteLine("6. Log out");
-                Console.WriteLine("6. Exit Application");
+                Console.WriteLine("7. Exit Application");
                 Console.WriteLine("\nYour input for choosing option is: ");
 
                 //MainMenuInput = Convert.ToInt32(Console.ReadLine());

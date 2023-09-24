@@ -151,7 +151,7 @@ namespace ConsoleApp1
         }
 
         // Generates an unique Doctor ID, 
-        // Format is: 00(XXX), where X can be any numbers between 0-9
+        // Format is: 10(XXX), where X can be any numbers between 0-9
         internal string GenerateUniqueDoctorID()
         {
             //return "114514";
@@ -162,8 +162,8 @@ namespace ConsoleApp1
             do
             {
                 patientID = "";
-                patientID += "0";
-                patientID += "0";
+                patientID += "10";
+                //patientID += "0";
                 patientID += Convert.ToString(rand.Next(100, 999));
                 //Console.WriteLine(patientID);
                 isDuplicated = CheckDoctorExistsByID(patientID);
