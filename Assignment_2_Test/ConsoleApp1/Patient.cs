@@ -111,13 +111,12 @@ namespace ConsoleApp1
                             Console.WriteLine("Displaying my doctor's details");
                             Console.ReadKey();
                             Console.Clear();
-                            //CheckPatientDetails();
+                            ListDoctorDetails();
                             break;
                         case 3:                            
                             Console.WriteLine("Listing all appointments");
                             Console.ReadKey();
                             Console.Clear();
-                            //AddPatient();
                             ListAllAppointments();
                             break;
                         case 4:
@@ -222,7 +221,7 @@ namespace ConsoleApp1
             Console.Clear();
         }// end of: BookAppointments()
 
-        public void ListAllAppointments()
+        private void ListAllAppointments()
         {
             Console.WriteLine("Appointments for {0}: ", this.Name);
             Console.ReadKey();
@@ -239,10 +238,20 @@ namespace ConsoleApp1
             Console.Clear();
         }
 
+        private void ListDoctorDetails()
+        {
+            Console.WriteLine("Your doctor \n");
+            Console.WriteLine(util.GetDoctorByID(assignedDoctorID).ToString());
+            Console.WriteLine("\nPress any keys to return to menu");
+            Console.ReadKey();
+            Console.Clear();
+        }
+
         private void ListPatientDetails()
         {
+            Console.WriteLine("{0}'s Details \n", this.Name);
             Console.WriteLine(ToString());
-            Console.WriteLine("\nYour patient details are all displayed.\nPress any keys to return to menu");
+            Console.WriteLine("\nPress any keys to return to menu");
             Console.ReadKey();
             Console.Clear();
         }
