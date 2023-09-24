@@ -286,7 +286,7 @@ namespace ConsoleApp1
             Random rand = new Random();
             string bookingID = "";
 
-            do
+            do // Generates an unique booking ID
             {
                 /*bookingID = "";
                 bookingID += "0";
@@ -350,6 +350,31 @@ namespace ConsoleApp1
             patientID += "0";
             patientID += "0";*/
             //patientID += Random.Next(0)
+        }
+
+        public Appointment GetAppointmentByID(string ID)
+        {
+            if (bookedAppointments.Count == 0 || ID == null)
+            {
+                throw new Exception("Booking list is not initialised");
+                //return false;
+            }
+
+            foreach (Appointment appointment in bookedAppointments)
+            {
+                //Console.WriteLine(patient.Patient_ID);
+                if (appointment.appointmentID == ID) { return appointment; }
+            }
+
+            /*for (int i = 0; i < patientList.Count; i++)
+            {
+                if (patientList[i].Patient_ID == ID)
+                {
+                    return patientList[i];
+                    //return true;
+                }
+            }*/
+            throw new Exception("Appointment not found");
         }
 
         

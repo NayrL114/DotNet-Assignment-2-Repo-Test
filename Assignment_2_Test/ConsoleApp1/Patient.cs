@@ -48,7 +48,7 @@ namespace ConsoleApp1
             {
                 this.assignedDoctorID = patientDetails[3];
 
-                for (int i = 4; i < patientDetails.Length; i++)
+                for (int i = 4; i < patientDetails.Length - 1; i++)
                 {
                     this.appointmentIDs.Add(patientDetails[i]);
                 }
@@ -118,6 +118,7 @@ namespace ConsoleApp1
                             Console.ReadKey();
                             Console.Clear();
                             //AddPatient();
+                            ListAllAppointments();
                             break;
                         case 4:
                             Console.WriteLine("Booking an appointment");
@@ -163,15 +164,15 @@ namespace ConsoleApp1
 
         private void BookAppointment()
         {
-            Console.WriteLine("Now inside BookAppointment()");
-            Console.ReadKey();
+            /*Console.WriteLine("Now inside BookAppointment()");
+            Console.ReadKey();*/
 
             List<string> appointmentInfo = new List<string>();
 
             appointmentInfo.Add(Patient_ID);
 
-            Console.Write("assignedDoctorID is: {0}\n", assignedDoctorID);
-            Console.ReadKey();
+            /*Console.Write("assignedDoctorID is: {0}\n", assignedDoctorID);
+            Console.ReadKey();*/
 
             //if (assignedDoctorID == null || assignedDoctorID.DoctorID == "")
             if (assignedDoctorID == null || assignedDoctorID == "")
@@ -182,7 +183,7 @@ namespace ConsoleApp1
                 do
                 {
                     Console.Clear();
-                    Console.WriteLine("No doctor is assigned.");
+                    Console.WriteLine("You are not registered with any doctors!");
                     util.PrintAllDoctors();
                     Console.WriteLine("\nChoose a doctor from below by typing the corresponding doctor ID: ");                    
                     inputID = Console.ReadLine();
@@ -217,6 +218,23 @@ namespace ConsoleApp1
             //FileManager.AppendAtTheEndOfLine("Patients.txt", Patient_ID, assignedDoctorID);
 
             Console.WriteLine("The appointment has been booked successfully.\nPress any keys to return to menu");
+            Console.ReadKey();
+            Console.Clear();
+        }// end of: BookAppointments()
+
+        public void ListAllAppointments()
+        {
+            Console.WriteLine("Appointments for {0}: ", this.Name);
+            Console.ReadKey();
+
+            foreach (string appointmentID in appointmentIDs)
+            {
+                Console.WriteLine(util.GetAppointmentByID(appointmentID).ToString());
+                
+                //Console.WriteLine()
+            }
+
+            Console.WriteLine("\nPress any keys to return to menu.");
             Console.ReadKey();
             Console.Clear();
         }

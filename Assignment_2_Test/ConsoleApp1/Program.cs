@@ -35,6 +35,11 @@ struct Appointment
         bookedDoctor = doctor;
         details = detail;
     }
+
+    public override string ToString()
+    {
+        return (bookedDoctor.Name + " | " + bookedPatient.Name + " | " + details);
+    }
 }
 
 namespace TestProgram
