@@ -102,6 +102,12 @@ namespace ConsoleApp1
                 for (int i = 0; i < contents.Length; i++)
                 {
                     //List<string> details = contents[i].Split(",");
+
+                    if (contents[i] == "")
+                    {
+                        continue;
+                    }
+
                     string[] details = contents[i].Split(",");
                     // Breaking down full file content into user attributes seperated by comma,
                     /*for (int i = 0; i < details.Length; i++)
@@ -114,7 +120,8 @@ namespace ConsoleApp1
 
                     //Console.WriteLine(details.Length);   
 
-                    if (details[1] == targetID) // details[1] should be the ID attribute for all users. 
+                    if (details[4] == targetID)
+                    /*if (details[1] == targetID)*/ // details[1] should be the ID attribute for all users. 
                     {
                         //Console.WriteLine("Found correct user with ID: {0}", targetID);
                         details[details.Length - 1] = updateContent;

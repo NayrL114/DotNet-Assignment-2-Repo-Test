@@ -12,6 +12,10 @@ namespace ConsoleApp1
     {
         public string Patient_ID { get; set; }
 
+        public string email { get; set; }
+        public string phone { get; set; }
+        public string address { get; set; }
+
         public string MainMenuInputString = "";
         public int MainMenuInput = 0;
 
@@ -19,6 +23,7 @@ namespace ConsoleApp1
 
         //private Doctor assignedDoctorID;
         private string assignedDoctorID;
+        private string assignedDoctorName;
 
         private List<string> appointmentIDs = new List<string>();
 
@@ -35,6 +40,35 @@ namespace ConsoleApp1
         {
             this.Patient_ID = patient_ID;
             this.Name = patientDetails[0];
+
+            this.email = patientDetails[1];
+            this.phone = patientDetails[2];
+            this.address = patientDetails[3];
+
+            // Below code will try to initialise the assignedDoctorName attribute for ToString().
+            // The Util class created here won't be used for future operation,
+            // if a Patient object is created through this constructor. 
+            Util util = new Util();
+            try
+            {
+                this.assignedDoctorID = patientDetails[6];
+                this.assignedDoctorName = util.GetDoctorByID(this.assignedDoctorID).Name;
+
+                for (int i = 7; i < patientDetails.Length - 1; i++)
+                {
+                    this.appointmentIDs.Add(patientDetails[i]);
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
+            /*catch (IndexOutOfRangeException e)
+            {
+
+            }*/
+
+
         }
 
         // Patient Constructor as current logged in user
@@ -42,21 +76,33 @@ namespace ConsoleApp1
         {
             this.Patient_ID = patient_ID;
             this.Name = patientDetails[0];
+
+            this.email = patientDetails[1];
+            this.phone = patientDetails[2];
+            this.address = patientDetails[3];
+
+            //this.
+
             this.util = util;
 
             try
             {
-                this.assignedDoctorID = patientDetails[3];
+                this.assignedDoctorID = patientDetails[6];
+                this.assignedDoctorName = util.GetDoctorByID(this.assignedDoctorID).Name;
 
-                for (int i = 4; i < patientDetails.Length - 1; i++)
+                for (int i = 7; i < patientDetails.Length - 1; i++)
                 {
                     this.appointmentIDs.Add(patientDetails[i]);
                 }
             }
-            catch (IndexOutOfRangeException e)
+            catch (Exception e)
             {
 
             }
+            /*catch (IndexOutOfRangeException e)
+            {
+
+            }*/
                      
             /*if (patientDetails[2] != null || patientDetails[2] != "")
             {
@@ -67,16 +113,36 @@ namespace ConsoleApp1
         public override string ToString()
         {
             //return base.ToString();
-            return (this.Name + ", " + this.Patient_ID);
+            //return (this.Name + ", " + this.Patient_ID);
+            return (this.Name + 
+                " | " + 
+                this.assignedDoctorName + 
+                " | " + 
+                this.email + 
+                " | " + 
+                this.phone + 
+                " | " + 
+                this.address);
+        }
+
+        public void PrintHeader()
+        {
+            Console.WriteLine("-------------------------------------");
+            Console.WriteLine("| DOTNET Hospital Management System |");
+            Console.WriteLine("|-----------------------------------|");
+            Console.WriteLine("|           Patient Menu            |");
+            Console.WriteLine("-------------------------------------");
         }
 
         public void MainMenu()
         {
-            do { 
+            do {
                 /*Console.WriteLine("This would display the main menu for the patient");
                 Console.WriteLine("The Patient ID is {0} and the Name is {1}", this.Patient_ID, this.Name);*/
 
-                Console.WriteLine("Welcome to DOTNET Hospital Management System, Patient {0}", this.Name);
+                PrintHeader();
+
+                Console.WriteLine("\nWelcome to DOTNET Hospital Management System, Patient {0}\n", this.Name);
 
                 Console.WriteLine("Please choose an option: ");
                 Console.WriteLine("1. List patient details");
@@ -105,24 +171,28 @@ namespace ConsoleApp1
                             /*Console.WriteLine("Displaying my details");
                             Console.ReadKey();*/
                             Console.Clear();
+                            PrintHeader();
                             ListPatientDetails();
                             break;
                         case 2:
                             /*Console.WriteLine("Displaying my doctor's details");
                             Console.ReadKey();*/
                             Console.Clear();
+                            PrintHeader();
                             ListDoctorDetails();
                             break;
                         case 3:                            
                             /*Console.WriteLine("Listing all appointments");
                             Console.ReadKey();*/
                             Console.Clear();
+                            PrintHeader();
                             ListAllAppointments();
                             break;
                         case 4:
                             /*Console.WriteLine("Booking an appointment");
                             Console.ReadKey();*/
                             Console.Clear();
+                            PrintHeader();
                             BookAppointment();
                             break;
                         case 5:
@@ -176,18 +246,32 @@ namespace ConsoleApp1
             //if (assignedDoctorID == null || assignedDoctorID.DoctorID == "")
             if (assignedDoctorID == null || assignedDoctorID == "")
             {
+                bool isFound = false;
                 string inputID;
 
                 // Making sure that user is entering a valid doctor ID
                 do
                 {
                     Console.Clear();
+                    PrintHeader();
                     Console.WriteLine("You are not registered with any doctors!");
-                    util.PrintAllDoctors();
-                    Console.WriteLine("\nChoose a doctor from below by typing the corresponding doctor ID: ");                    
+                    util.PrintAllDoctors(false);
+                    Console.WriteLine("\nChoose a doctor from below by typing the number option: ");
                     inputID = Console.ReadLine();
+
+                    try
+                    {
+                        Doctor doctor = util.GetDoctorByIndex(Convert.ToInt32(inputID));
+                        isFound = true;
+                        assignedDoctorID = doctor.DoctorID;
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("\nInvalid Input. Returning to menu. ");
+                    }
                 }
-                while (!util.CheckDoctorExistsByID(inputID));
+                while (!isFound);
+                //while (!util.CheckDoctorExistsByID(inputID));
                 // While there is not a valid doctor existing with this ID
 
                 //string inputID = Console.ReadLine();
@@ -197,7 +281,7 @@ namespace ConsoleApp1
                     appointmentInfo.Add(inputID);
                 }*/
 
-                assignedDoctorID = inputID;
+                //assignedDoctorID = inputID;
 
                 FileManager.AppendAtTheEndOfLine("Patients.txt", Patient_ID, assignedDoctorID);
             }
@@ -212,7 +296,8 @@ namespace ConsoleApp1
             //Console.WriteLine(appointmentDetails);
             appointmentInfo.Add(appointmentDetails);
 
-            util.AddAppointment(appointmentInfo);
+            string bookingID = util.AddAppointment(appointmentInfo);
+            appointmentIDs.Add(bookingID);
 
             //FileManager.AppendAtTheEndOfLine("Patients.txt", Patient_ID, assignedDoctorID);
 
@@ -225,6 +310,11 @@ namespace ConsoleApp1
         {
             Console.WriteLine("Appointments for {0}: ", this.Name);
             //Console.ReadKey();
+
+            if (appointmentIDs.Count == 0)
+            {
+                Console.WriteLine("You currently do not have any appointments");
+            }
 
             foreach (string appointmentID in appointmentIDs)
             {
@@ -241,7 +331,15 @@ namespace ConsoleApp1
         private void ListDoctorDetails()
         {
             Console.WriteLine("Your doctor: \n");
-            Console.WriteLine(util.GetDoctorByID(assignedDoctorID).ToString());
+            try
+            {
+                Console.WriteLine(util.GetDoctorByID(assignedDoctorID).ToString());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("You currently do not have any assigned doctors");
+            }
+            
             Console.WriteLine("\nPress any keys to return to menu");
             Console.ReadKey();
             Console.Clear();
@@ -249,8 +347,14 @@ namespace ConsoleApp1
 
         private void ListPatientDetails()
         {
-            Console.WriteLine("{0}'s Details \n", this.Name);
-            Console.WriteLine(ToString());
+            Console.WriteLine("{0}'s Details: \n", this.Name);
+            //Console.WriteLine(ToString());
+            Console.WriteLine("Patient ID: {0}", this.Patient_ID);
+            Console.WriteLine("Full Name: {0}", this.Name);
+            Console.WriteLine("Address: {0}", this.address);
+            Console.WriteLine("Email: {0}", this.email);
+            Console.WriteLine("Phone: {0}", this.phone);
+
             Console.WriteLine("\nPress any keys to return to menu");
             Console.ReadKey();
             Console.Clear();

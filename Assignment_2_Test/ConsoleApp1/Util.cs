@@ -67,7 +67,7 @@ namespace ConsoleApp1
                     {
                         continue;
                     }
-                    Doctor doctor = new Doctor(detail[1], detail);
+                    Doctor doctor = new Doctor(detail[4], detail);
                     doctorList.Add(doctor);
                 }
 
@@ -79,7 +79,7 @@ namespace ConsoleApp1
                         continue;
                     }
                     //Console.WriteLine("Creating Patient {0}", detail[0]);
-                    Patient patient = new Patient(detail[1], detail);
+                    Patient patient = new Patient(detail[4], detail);
                     patientList.Add(patient);
                 }
 
@@ -204,7 +204,7 @@ namespace ConsoleApp1
         public Patient GetPatientByID(string ID) {
             if (patientList.Count == 0 || ID == null)
             {
-                throw new Exception("Patient list is not initialised");
+                throw new Exception("No patients stored in the database.");
                 //return false;
             }
 
@@ -222,7 +222,7 @@ namespace ConsoleApp1
                     //return true;
                 }
             }*/
-            throw new Exception("Patient not found");
+            throw new Exception("Patient not found.");
             //return false;
         }
 
@@ -235,7 +235,7 @@ namespace ConsoleApp1
                 //return false;
             }
 
-            Console.WriteLine("Printing all patient now");
+            //Console.WriteLine("Printing all patient now");
 
             foreach (Patient patient in patientList)
             {
@@ -246,11 +246,11 @@ namespace ConsoleApp1
         }
 
         // Get a doctor object stored in the doctorList by passed in ID
-        public Doctor GetDoctorByID(string ID)
+        public Doctor GetDoctorByID(string ID) /*throws Exception*/
         {
             if (doctorList.Count == 0 || ID == null)
             {
-                throw new Exception("Doctor list is not initialised");
+                throw new Exception("No doctors stored in the database.");
                 //return false;
             }
 
@@ -260,7 +260,7 @@ namespace ConsoleApp1
                 if (doctor.DoctorID == ID) { return doctor; }
             }
             
-            throw new Exception("Doctor not found");
+            throw new Exception("Doctor not found.");
             //return false;
         }
 
@@ -273,7 +273,7 @@ namespace ConsoleApp1
                 //return false;
             }
 
-            Console.WriteLine("Printing all doctor now");
+            //Console.WriteLine("Printing all doctor now");
 
             foreach (Doctor doctor in doctorList)
             {
@@ -281,6 +281,45 @@ namespace ConsoleApp1
                 Console.WriteLine(doctor.ToString());
                 //if (patient.Patient_ID == ID) { return patient; }
             }
+        }
+
+        public void PrintAllDoctors(bool isDifferent)
+        {
+            if (doctorList.Count == 0)
+            {
+                Console.WriteLine("No doctor stored in the database. ");
+                //return false;
+            }
+
+            //Console.WriteLine("Printing all doctor now");
+
+            //foreach (Doctor doctor in doctorList)
+            for (int i = 0; i < doctorList.Count; i++)  
+            {
+                //Console.WriteLine("Printing a patient");
+                Console.WriteLine("{0}: {1}", i + 1, doctorList[i].ToString());
+                //if (patient.Patient_ID == ID) { return patient; }
+            }
+        }
+
+        public Doctor GetDoctorByIndex(int i)
+        {
+            if (doctorList.Count == 0 || i > doctorList.Count)
+            {
+                throw new Exception("No doctors stored in the database.");
+                //return false;
+            }
+
+            return doctorList[i - 1];
+
+            /*foreach (Doctor doctor in doctorList)
+            {
+                //Console.WriteLine(patient.Patient_ID);
+                if (doctor.DoctorID == ID) { return doctor; }
+            }
+
+            throw new Exception("Doctor not found.");*/
+            //return false;
         }
 
         public bool CheckDoctorExistsByID(string ID)
@@ -307,7 +346,7 @@ namespace ConsoleApp1
         // A new Appointment struct is created and added to the Appointment.txt file
 
         //public void AddAppointment(string appointment)
-        public void AddAppointment(List<string> appointmentDetail)
+        public string AddAppointment(List<string> appointmentDetail)
         {
             bool isDuplicated = true;
             Random rand = new Random();
@@ -374,6 +413,8 @@ namespace ConsoleApp1
 
             FileManager.AppendToFileEnd("Appointments.txt", finalAdding);
 
+            return bookingID;
+
             //return patientID;
             /*string patientID = "";
             patientID += "0";
@@ -385,7 +426,7 @@ namespace ConsoleApp1
         {
             if (bookedAppointments.Count == 0 || ID == null)
             {
-                throw new Exception("Booking list is not initialised");
+                throw new Exception("Currently No Bookings");
                 //return false;
             }
 
@@ -405,12 +446,7 @@ namespace ConsoleApp1
             }*/
             throw new Exception("Appointment not found");
         }
-
         
-
-
-
-
 
         /*public Doctor GetDoctorByID(string ID)
         {

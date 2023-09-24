@@ -121,6 +121,16 @@ namespace TestProgram
         //private String name;
 
         private bool LoggedIn;
+
+        private void PrintHeader()
+        {
+            Console.WriteLine("-------------------------------------");
+            Console.WriteLine("| DOTNET Hospital Management System |");
+            Console.WriteLine("|-----------------------------------|");
+            Console.WriteLine("|              Log In               |");
+            Console.WriteLine("-------------------------------------");
+        }
+
         public void PrintLogInMenu()
         {
             // Below codes will initilise all the lists containing all user details
@@ -140,16 +150,21 @@ namespace TestProgram
                 doctorFileLines = FileManager.ReadStringListFromFile("Doctors.txt");
                 patientFileLines = FileManager.ReadStringListFromFile("Patients.txt");
 
+                util.WipeUserData();
                 util.InitialiseUserData();
 
+                PrintHeader();
+
                 // Asking users to input login details
-                Console.WriteLine("Welcome to DOTNET Hospital Management System");
-                Console.Write("ID: ");
+                Console.WriteLine("\nWelcome to DOTNET Hospital Management System");
+                Console.Write("\nID: ");
                 //String LogInID = Console.ReadLine();
                 LogInID = Console.ReadLine();
-                Console.Write("Password: ");
+                Console.Write("\nPassword: ");
                 //String LogInPW = Console.ReadLine();
                 LogInPW = Console.ReadLine();
+
+                Console.Write("\n");
 
                 // Change the currentUserType enum through authenticating user input's login details
                 TestLogInCredentials(LogInID, LogInPW);
@@ -158,8 +173,8 @@ namespace TestProgram
                 switch (currentUserType)
                 {
                     case userType.LoggedOut:
-                        Console.WriteLine("The system is still at LoggedOut state");
-                        Console.ReadKey();
+                        /*Console.WriteLine("The system is still at LoggedOut state");
+                        Console.ReadKey();*/
                         Console.Clear();
                         break;
                     case userType.Admin:
@@ -296,50 +311,7 @@ namespace TestProgram
                 Console.Clear();*/
                 //return;                
 
-            }
-
-            // Autenticating for admins
-            /*foreach (string adminDetail in adminFileLines)
-            {
-                //Console.WriteLine($"{adminDetail}");
-                //Console.WriteLine("{0}", adminDetail);
-
-                String[] details = adminDetail.Split(',');
-
-                if (LogInID == details[1])
-                {
-                    if (LogInPW == details[2])
-                    {
-                        // If ID and passwords all matches
-                        Console.WriteLine("Autenticated as Admin {0}", details[0]);
-                        Console.ReadKey();
-                        Console.Clear();
-                        //name = details[0];
-                        LoggedInUserDetails = details;
-                        //Admin admin = new Admin(details[1], details[0]);
-                        currentUserType = userType.Admin;
-                        LoggedIn = !LoggedIn;
-                        //admin.MainMenu();
-                        return;
-                    }
-                    else
-                    {
-                        // If password does not match
-                        Console.WriteLine("Incorrect Password! \nPress any keys to retry");
-                        Console.ReadKey();
-                        Console.Clear();
-                        return;
-                    }
-                }
-
-                // If the code reaches here,
-                // that means there are no matching IDs in the txt file
-                *//*Console.WriteLine("Incorrect user ID! \nPress any keys to retry");
-                Console.ReadKey();
-                Console.Clear();*//*
-                //return;                
-
-            }*/
+            }// end of: Admin foreach            
 
             // Autenticating for doctors
             foreach (string doctorDetail in doctorFileLines)
@@ -354,9 +326,11 @@ namespace TestProgram
                     continue;
                 }
 
-                if (LogInID == details[1])
+                if (LogInID == details[4])
+                //if (util.CheckDoctorExistsByID(LogInID))
                 {
-                    if (LogInPW == details[2])
+                    if (LogInPW == details[5])
+                    //if (util.GetDoctorByID(doctorDetail). == )
                     {
                         // If ID and passwords all matches
                         Console.WriteLine("Autenticated as Doctor {0}", details[0]);
@@ -402,9 +376,9 @@ namespace TestProgram
                     continue;
                 }
 
-                if (LogInID == details[1])
+                if (LogInID == details[4])
                 {
-                    if (LogInPW == details[2])
+                    if (LogInPW == details[5])
                     {
                         // If ID and passwords all matches
                         Console.WriteLine("Autenticated as Patient {0}", details[0]);

@@ -40,6 +40,15 @@ namespace ConsoleApp1
             this.util = util;// Receiving the util object initialised from Program.cs
         }
 
+        public void PrintHeader()
+        {
+            Console.WriteLine("-------------------------------------");
+            Console.WriteLine("| DOTNET Hospital Management System |");
+            Console.WriteLine("|-----------------------------------|");
+            Console.WriteLine("|            Admin Menu             |");
+            Console.WriteLine("-------------------------------------");
+        }
+
         public void MainMenu()
         {
             do
@@ -47,7 +56,9 @@ namespace ConsoleApp1
                 //Console.WriteLine("This would display the main menu for the ADMIN");
                 //Console.WriteLine("The Admin ID is {0} and the Name is {1}", this.Admin_ID, this.Name);
 
-                Console.WriteLine("Welcome to DOTNET Hospital Management System, Admin {0}", this.Name);
+                PrintHeader();
+
+                Console.WriteLine("\nWelcome to DOTNET Hospital Management System, Admin {0}\n", this.Name);
 
                 Console.WriteLine("Please choose an option: ");
                 Console.WriteLine("1. List all doctors");
@@ -79,36 +90,42 @@ namespace ConsoleApp1
                             /*Console.WriteLine("Listing all doctor");
                             Console.ReadKey();*/
                             Console.Clear();
+                            PrintHeader();
                             ListAllDoctors();
                             break;
                         case 2:
                             /*Console.WriteLine("Checking an existing doctor");
                             Console.ReadKey();*/
                             Console.Clear();
+                            PrintHeader();
                             CheckDoctorDetails();
                             break;
                         case 3:
                             /*Console.WriteLine("Listing all patients");
                             Console.ReadKey();*/
                             Console.Clear();
+                            PrintHeader();
                             ListAllPatients();
                             break;
                         case 4:
                             /*Console.WriteLine("Checking an existing patient");
                             Console.ReadKey();*/
                             Console.Clear();
+                            PrintHeader();
                             CheckPatientDetails();
                             break;
                         case 5:
                             /*Console.WriteLine("Adding a new doctor");
                             Console.ReadKey();*/
                             Console.Clear();
+                            PrintHeader();
                             AddDoctor();
                             break;
                         case 6:
                             /*Console.WriteLine("Adding a new patient");
                             Console.ReadKey();*/
                             Console.Clear();
+                            PrintHeader();
                             AddPatient();
                             break;
                         case 7:
@@ -157,7 +174,7 @@ namespace ConsoleApp1
 
             util.PrintAllDoctors();
 
-            Console.WriteLine("All doctors displayed.\nPress any keys to return to menu. ");
+            Console.WriteLine("\nAll doctors displayed.\nPress any keys to return to menu. ");
             Console.ReadKey();
             Console.Clear();
         }
@@ -195,7 +212,7 @@ namespace ConsoleApp1
 
             util.PrintAllPatients();
 
-            Console.WriteLine("All patients displayed.\nPress any keys to return to menu. ");
+            Console.WriteLine("\nAll patients displayed.\nPress any keys to return to menu. ");
             Console.ReadKey();
             Console.Clear();
         }
@@ -216,7 +233,7 @@ namespace ConsoleApp1
             }
             catch (Exception e)
             {
-                //Console.WriteLine(e.ToString());
+                Console.WriteLine(e.Message);
             }
 
             Console.WriteLine("Patient details printed out. \nPress any keys to return to menu");
@@ -237,13 +254,44 @@ namespace ConsoleApp1
 
             do
             {
-                Console.WriteLine("Input Patient Name: ");
-                inputDetails.Add(Console.ReadLine());
 
-                Console.WriteLine("Your unique PatientID is: ");
+                Console.WriteLine("Registering a new patient with the DOTNET Hospital Management System. \n");
+
+                Console.Write("\nFirst Name: ");
+                string fName = Console.ReadLine();
+                Console.Write("\nLast Name: ");
+                string lName = Console.ReadLine();
+                string fullName = fName + " " + lName;
+                inputDetails.Add(fullName); // [0]
+
+                Console.Write("\nEmail: ");
+                inputDetails.Add(Console.ReadLine()); // [1]
+
+                Console.Write("\nPhone: ");
+                inputDetails.Add(Console.ReadLine()); // [2]
+
+                Console.Write("\nStreet Number: ");
+                string stNo = Console.ReadLine();
+                Console.Write("\nStreet: ");
+                string st = Console.ReadLine();
+                Console.Write("\nCity: ");
+                string ct = Console.ReadLine();
+                Console.Write("\nState: ");
+                string state = Console.ReadLine();
+
+                string fullAddress = stNo + " " + st + " " + ct + " " + state;
+                inputDetails.Add(fullAddress); // [3]
+
+                /*Console.WriteLine("Input Patient Name: ");
+                inputDetails.Add(Console.ReadLine());*/
+
                 string uniqueID = util.GenerateUniquePatientID();
-                Console.WriteLine(uniqueID);
-                inputDetails.Add(uniqueID);
+                Console.Write("\nYour unique PatientID is: {0}", uniqueID);                
+                //Console.WriteLine(uniqueID);
+                inputDetails.Add(uniqueID); // [4]
+
+                Console.Write("\nInput Patient Password: ");
+                inputDetails.Add(Console.ReadLine()); // [5]
 
                 /*Console.WriteLine("Input Patient ID: ");
                 //inputDetails.Add(Console.ReadLine());
@@ -263,35 +311,34 @@ namespace ConsoleApp1
                     }
                 }*/
 
-                Console.WriteLine("Input Patient Password: ");
-                inputDetails.Add(Console.ReadLine());
-
                 do
                 {
-                    Console.WriteLine("Comfirm Adding? Y/N");
+                    Console.WriteLine("\nComfirm Adding? Y/N");
                     string input = Console.ReadLine();
                     if (input == null || input == "")
                     {
-                        Console.WriteLine("Invalid Input, press any keys to try again.");
+                        Console.WriteLine("\nInvalid Input, press any keys to try again.");
                         Console.ReadKey();
                         Console.Clear();
+                        PrintHeader();
                     }
                     else if (input == "N")
                     {
                         bool retryValid = false;
                         do
                         {
-                            Console.WriteLine("Do you want to input details again? Y/N");
+                            Console.WriteLine("\nDo you want to input details again? Y/N");
                             string inputTwo = Console.ReadLine();
                             if (inputTwo == null || inputTwo == "")
                             {
-                                Console.WriteLine("Invalid Input, press any keys to try again.");
+                                Console.WriteLine("\nInvalid Input, press any keys to try again.");
                                 Console.ReadKey();
                                 Console.Clear();
+                                PrintHeader();
                             }
                             else if (inputTwo == "N")
                             {
-                                Console.WriteLine("Cancelling adding patient operation.\nPress any keys to return to main menu. ");
+                                Console.WriteLine("\nCancelling adding patient operation.\nPress any keys to return to main menu. ");
                                 Console.ReadKey();
                                 Console.Clear();
                                 return;
@@ -301,9 +348,10 @@ namespace ConsoleApp1
                             }
                             else if (inputTwo == "Y")
                             {
-                                Console.WriteLine("Adding patient again with new detail inputs. ");
+                                Console.WriteLine("\nAdding patient again with new detail inputs. ");
                                 Console.ReadKey();
                                 Console.Clear();
+                                PrintHeader();
                                 inputDetails = new List<String>();
                                 retryValid = true;
                                 comfirmAdding = true;
@@ -317,7 +365,7 @@ namespace ConsoleApp1
                     }
                     else if (input == "Y")
                     {
-                        Console.WriteLine("Comfirmed adding.\nPress any keys to continue.");
+                        Console.WriteLine("{0} added to the system.\nPress any keys to continue.", fullName);
                         Console.ReadKey();
                         comfirmAdding = true;
                         finishedAdding = true;
@@ -370,13 +418,43 @@ namespace ConsoleApp1
 
             do
             {
-                Console.WriteLine("Input Doctor Name: ");
-                inputDetails.Add(Console.ReadLine());
+                Console.WriteLine("Registering a new doctor with the DOTNET Hospital Management System. \n");
 
-                Console.WriteLine("Your unique DoctorID is: ");
+                Console.Write("\nFirst Name: ");
+                string fName = Console.ReadLine();
+                Console.Write("\nLast Name: ");
+                string lName = Console.ReadLine();
+                string fullName = fName + " " + lName;
+                inputDetails.Add(fullName); // [0]
+
+                Console.Write("\nEmail: ");
+                inputDetails.Add(Console.ReadLine()); // [1]
+
+                Console.Write("\nPhone: ");
+                inputDetails.Add(Console.ReadLine()); // [2]
+
+                Console.Write("\nStreet Number: ");
+                string stNo = Console.ReadLine();
+                Console.Write("\nStreet: ");
+                string st = Console.ReadLine();
+                Console.Write("\nCity: ");
+                string ct = Console.ReadLine();
+                Console.Write("\nState: ");
+                string state = Console.ReadLine();
+
+                string fullAddress = stNo + " " + st + " " + ct + " " + state;
+                inputDetails.Add(fullAddress); // [3]
+
+                /*Console.WriteLine("Input Patient Name: ");
+                inputDetails.Add(Console.ReadLine());*/
+
                 string uniqueID = util.GenerateUniqueDoctorID();
-                Console.WriteLine(uniqueID);
-                inputDetails.Add(uniqueID);
+                Console.Write("\nYour unique DoctorID is: {0}", uniqueID);
+                //Console.WriteLine(uniqueID);
+                inputDetails.Add(uniqueID); // [4]
+
+                Console.Write("\nInput Doctor Password: ");
+                inputDetails.Add(Console.ReadLine()); // [5]
 
                 /*Console.WriteLine("Input Patient ID: ");
                 //inputDetails.Add(Console.ReadLine());
@@ -396,8 +474,8 @@ namespace ConsoleApp1
                     }
                 }*/
 
-                Console.WriteLine("Input Doctor Password: ");
-                inputDetails.Add(Console.ReadLine());
+                /*Console.WriteLine("Input Doctor Password: ");
+                inputDetails.Add(Console.ReadLine());*/
 
                 do
                 {
@@ -408,6 +486,7 @@ namespace ConsoleApp1
                         Console.WriteLine("Invalid Input, press any keys to try again.");
                         Console.ReadKey();
                         Console.Clear();
+                        PrintHeader();
                     }
                     else if (input == "N")
                     {
@@ -421,6 +500,7 @@ namespace ConsoleApp1
                                 Console.WriteLine("Invalid Input, press any keys to try again.");
                                 Console.ReadKey();
                                 Console.Clear();
+                                PrintHeader();
                             }
                             else if (inputTwo == "N")
                             {
@@ -450,7 +530,8 @@ namespace ConsoleApp1
                     }
                     else if (input == "Y")
                     {
-                        Console.WriteLine("Comfirmed adding.\nPress any keys to continue.");
+                        //Console.WriteLine("Comfirmed adding.\nPress any keys to continue.");
+                        Console.WriteLine("{0} added to the system.\nPress any keys to continue.", fullName);
                         Console.ReadKey();
                         comfirmAdding = true;
                         finishedAdding = true;
